@@ -1,0 +1,63 @@
+\documentclass[twocolumn]{paper} 
+
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel} 
+\usepackage{graphicx}
+
+
+\author{Filip Guzy, E-mail:  218672@student.pwr.edu.pl\\
+Jędrzej Kozal, E-mail:  218557@student.pwr.edu.pl}
+\title{Methods of feature extraction for broad and deep data sets}
+\subtitle{Current state of affairs and comparison of avaliable solutions}
+\institution{Wrocław University of Siecnce and Technology}
+
+\begin{document}
+\maketitle
+
+\selectlanguage{english}
+\begin{abstract}
+   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et hendrerit nunc. Sed commodo, arcu et aliquam euismod, tellus massa efficitur massa, eget porttitor metus leo sit amet dui.
+\end{abstract}
+
+\section{Introduction}
+
+Feature extraction algorithms are fundamental part of Machine Learning.
+Using of Feature extraction is not always desirable. Result of FE is creating are features, that have no particular meaning in analysed domain, therefore experts cannot use thier intuition to work with them, also no explanation to why such decision was made may be given (for example docotor cannot reason why diagnostic system assigned perticular set of symptoms to some disease, or in other case decline of giving load cannot be substantiationated).
+Statistical and other methods.
+
+Feature extraction methods can be straigtly conected to field of studies and data that are analysed. Therefore many algoritms are composed to give best performece for one domain or perticular type of data. Having that in mind in this work we analyse both papers were basic methods were introduced and some state of the art solution for selected domains.
+
+In this work we will compare the results given by the selected methods.
+
+\section{Related work}
+
+\subsection{Linear Discriminant Analysis}
+
+Linear Discriminant Analysis (LDA) was introduced in \cite{LDA} as a solution for classification problem for two classes. Important adjustments was made in \cite{multi_LDA}, that enabled use of LDA for multiclass problem.
+
+\section{Experimental settings}
+
+\subsection{Dataset describtion}
+
+\section{Results}
+
+\section{Conclusion}
+
+\newpage
+\begin{thebibliography}{9}
+
+\bibitem{LDA}
+R. A. FISHER, Sc.D, 1936
+'The Use of Multiple Measurements in Taxonomic Problems', 
+IEEE Transactions on Biomedical Engineering (to appear).
+
+\bibitem{multi_LDA}
+C. Radhakrishna Rao, Duckworth laboratory, Univesity Museum of Archaeology and Ethnology, Cambridge
+'The Utilization of Multiple Measurements in Problems of Biological Classification'
+Journal of the Royal Statistical Society. Series B. Vol. 10, No. 2 (1948), pp. 159-203
+
+\end{thebibliography}
+\newpage
+
+\end{document}
