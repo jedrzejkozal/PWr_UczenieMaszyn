@@ -1,63 +1,245 @@
-\documentclass[twocolumn]{paper} 
-
+\documentclass[a4paper, 10 pt, conference]{ieeeconf}
+\overrideIEEEmargins
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[english]{babel} 
 \usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{amssymb}
+\usepackage{url}
+\usepackage{makecell}
 
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{gray!5!white},   
+	commentstyle=\color{green!50!black},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{black!50!white},
+	stringstyle=\color{purple},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+\lstset{style=mystyle}
 
-\author{Filip Guzy, E-mail:  218672@student.pwr.edu.pl\\
-Jędrzej Kozal, E-mail:  218557@student.pwr.edu.pl}
-\title{Methods of feature extraction for broad and deep data sets}
-\subtitle{Current state of affairs and comparison of avaliable solutions}
-\institution{Wrocław University of Siecnce and Technology}
+\usepackage{tikz}
+
+\newcommand{\bb}{\textbf}
+\DeclareMathOperator*{\argmax}{argmax}
+
+\title{\LARGE \bf
+Methods of feature extraction for broad and deep datasets
+}
+
+\author{ \parbox{2 in}{\centering Filip Guzy \\
+        Wrocław University of Science and Technology\\
+        {\tt\small 218672@student.pwr.edu.pl}}
+        \hspace*{ 0.3 in}
+        \parbox{2 in}{\centering Jędrzej Kozal \\
+        Wrocław University of Science and Technology\\
+        {\tt\small 218557@student.pwr.edu.pl}}
+}
 
 \begin{document}
 \maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
 
 \selectlanguage{english}
 \begin{abstract}
-   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et hendrerit nunc. Sed commodo, arcu et aliquam euismod, tellus massa efficitur massa, eget porttitor metus leo sit amet dui.
+
 \end{abstract}
 
 \section{Introduction}
 
-Feature extraction algorithms are fundamental part of Machine Learning.
-Using of Feature extraction is not always desirable. Result of FE is creating are features, that have no particular meaning in analysed domain, therefore experts cannot use thier intuition to work with them, also no explanation to why such decision was made may be given (for example docotor cannot reason why diagnostic system assigned perticular set of symptoms to some disease, or in other case decline of giving load cannot be substantiationated).
-Statistical and other methods.
+Feature extraction (FE) is a fundamental part of Machine Learning. Its main responsibility it to make sure that our classifiers won't get tons of unnecessary data on their inputs. We can divide FE algorithms into two groups: statistical and non-statistical. The group of statistical methods contains algorithms like Principle Component Analysis (PCA) or Linear Discriminant Analysis (LDA). In the second group we can find methods based on artificial intelligence, such as Convolutional Neural Networks (CNN). 
 
-Feature extraction methods can be straigtly conected to field of studies and data that are analysed. Therefore many algoritms are composed to give best performece for one domain or perticular type of data. Having that in mind in this work we analyse both papers were basic methods were introduced and some state of the art solution for selected domains.
+Extracting particular features may help classifiers in making proper decisions, but in many cases it is not helpful for humans. When decision system is a black box, experts cannot use their intuition to predict the output, they also have no explanation why such decision was made. For example, it cannot be deduced why hospital diagnostic system assigned particular set of symptoms to the disease, or why loan request was rejected by the bank system.
 
-In this work we will compare the results given by the selected methods.
+Feature extraction methods can be straightly connected with the field of studies and analysed data. Therefore, many algorithms are composed to give the best performance for specific domain or particular type of data. With regard to this fact, in this article both basic FE methods and state-of-the-art solutions will be analysed and compared. The main focus will be put on the comparison of PCA, LDA, and CNN approaches by applying them to two datasets and testing their effectiveness on the selected classifiers.
 
 \section{Related work}
+PCA was introduced in 1901 paper \cite{PCA}. Currently it is one of the most popular feature extraction algorithms. It applies to many fields, especially to computer vision \cite{PCA_book}. Methods such as Robust PCA, Simplified PCA or Functional PCA were described in \cite{PCA_recent}. More insight into RPCA was given in \cite{RPCA}.
+
+Linear Discriminant Analysis (LDA) was introduced in \cite{LDA} as a solution for binary classification problem. Important adjustments was made in \cite{multi_LDA}, that enabled usage of LDA for multi-class problem. Authors of \cite{LDA_recent} focused mainly on the problem of LDA for small sample size data, which is not relevant in case of this work, but it gives a good overview on the research done recently in this field.
+
+Balanced local discriminant embedding (BLDE) and convolutional neural networks (CNN) as methods for spacial-domain and spectral-domain feature extraction were proposed in \cite{blde-cnn}. BLDE was used as a first part of the described hyperspectral images (HSI) classifier. Its task was to find a low-dimensional representation of classified images. Second part included CNN framework designed especially for extracting high level deep features. Extracted features were then stacked and input into Logistic Regression (LR) classifier. Usage of convolutional neural networks for feature extraction purposes was also proposed in \cite{cnn}. In this case, 3-D CNN model with combined regularization was used in spectral-spacial feature extraction. Comparison of 3-D CNN model with another deep learning based methods, like stacked autoencoder (SAE), deep brief network (DBN) or 2D-CNN-based method was described in \cite{cnn2}. Another CNN-based deep learning approach was shown in \cite{cnn3}. Proposed approach assumed usage of the special type of CNN architecture - Deep Pyramidal Residual Network. The specific part of this architecture were pyramidal bottleneck residual blocks of convolutional layers. It allows to gradually increase the feature map dimension at all convolutional layers, what leads to involving more locations as the network depth increases, balancing the workload among all units and preserving the time complexity on each layer. Another solution for improving spectral-spatial feature extraction was proposed in \cite{cnn4}. Traditional pooling layer of CNN was replaced with spatial pyramid pooling (SPP), what resulted in increasement of extraction effectiveness.
+
+A different approach, based on propagation filter (PF), was presented in \cite{propagation-filter}. First, the PCA algorithm was used in order to reduce HSI dimensionality. Then, the extracted principal components were filtered with the PF. In the last step of the experiment, extracted and filtered spectral-spatial features were input into support vector machine (SVM) classifiers to test the effectiveness of the classification.
+
+\section{Methods}
+
+\subsection{Principle Component Analysis}
+PCA allows to reduce dimensionality of selected dataset. It results in maximising the variance of dataset by the new basis of lower dimensional space. Let's suppose that space $\mathbb{R}^{M}$ is given and we want to lower its dimension to $D$. We want to find projection matrix that enables this transformation of space. We also want to lose as little information as possible. In this case, using PCA requires calculation of eigenvalues and eigenvectors of covariance matrix $S$ (or evaluation of scatter matrix $A$, and calculating eigenvalues and eigenvectors of $\frac{1}{N}AA^{T}$ matrix). $D$ eigenvectors, that correspond to the biggest eigenvalues are used as a basis of a new space. These eigenvectors point the directions of the biggest change of variance in data.  The same problem can be reframed as maximalization of variance while projecting on vector $\bb{u}$:
+
+\begin{align}
+	f(\bb{u}) &= \bb{u}^T S \bb{u} \\
+	g(\bb{u}) &= 1 - \bb{u}^T \bb{u} = 0   \notag
+\end{align}
+
+where $f$ is variation while projecting on $\bb{u}$, and is additional constriction that yields $||\bb{u}||_{2} = 1$. The same can be formulated as Lagrangian:
+
+\begin{align}
+	\mathcal{L}(\bb{u}, \lambda) &= f(\bb{u}) - \lambda g(\bb{u}) \\
+	    &= \bb{u}^T S \bb{u} - \lambda (1 - \bb{u}^T \bb{u})   \notag
+\end{align}
+
+and solved as optimization with the constrain problem. Please note that covariance matrix is symmetrical, i.e. it can be written as $S = Q \Lambda Q^{T}$, where $Q$ is an orthogonal matrix, and $\Lambda$ is a diagonal matrix with the real eigenvalues of $S$. According to this fact, finding new basis is always possible and new basis is always orthogonal.
+
+Taking $\bb{u}_{n}$ as $n$-th eigenvector of covariance matrix, projection matrix $P$ can be written as:
+
+\begin{align}
+	P =
+	\left( \begin{array}{l}
+		\bb{u}_1^T \\
+		\bb{u}_2^T \\
+		\vdots	 \\
+		\bb{u}_M^T
+	\end{array} \right)
+\end{align}
+
+This matrix enables projection of any vector from $\mathbb{R}^M$ to $\mathbb{R}^D$.
+More insight into the theory of PCA is given in \cite{Pattern_recognition}.
 
 \subsection{Linear Discriminant Analysis}
 
-Linear Discriminant Analysis (LDA) was introduced in \cite{LDA} as a solution for classification problem for two classes. Important adjustments was made in \cite{multi_LDA}, that enabled use of LDA for multiclass problem.
+LDA is a supervised dimensionality reduction algorithm, which aims to increase the linear separation of classes after projecting the orignal space. In order achieve this goal Fischer criterion is used:
+
+\begin{equation}
+    \argmax_{W} \frac{W^{T} S_{B} W}{W^{T} S_{W} W}
+    \label{eq:Fischer_criterion}
+\end{equation}
+
+where $S_{B}$ is a between-class covariance, and $S_{W}$ is a within-class covariance. $W$ is a space that we are projecting on it. $S_{B}$ is defined as:
+
+\begin{equation}
+    S_B = \sum_{i} (\mu_{i} - \mu)(\mu_{i} - \mu)^{T}
+\end{equation}
+
+where $\mu_i = \frac{1}{n_{c_i}} \sum_{j=1}^{n_{c_j}} x_i$ is an average of samples from $i$-th class, and $\mu = \frac{1}{N} \sum_{j=1}^{N} x_j$ is an average of all samples. $S_B$ can be used to describe the distance between classes after performing projection on $W$:
+
+\begin{align}
+    (m_i - m)^2 &= (W^T \mu_i - W^T \mu)^2 \nonumber \\
+                &= (W^T (\mu_i - \mu)(\mu_i - \mu)^T W \\
+                &= W^T S_{B_i} W \nonumber
+\end{align}
+
+So, maximizing the nominator of the Fischer criterion results in best linear separability after projection to lower-dimension space.
+$S_{W}$ is defined as:
+
+\begin{equation}
+    S_{W} = \sum_{i} A_{i}A_{i}^T
+\end{equation}
+
+where $A_i$ is matrix of all samples $X_i$ from class $i$ reduced by $\mu_i$. $S_W$ is used to describe distance between samples of the chosen class and its mean after projection:
+
+\begin{align}
+    (W^{T} X_i - M_i)^2 &= (W^{T} X_i - W^{T} U_i)^2 \nonumber \\
+                        &= W^{T} (X_i - U_i)(X_i - U_i)^T W \\
+                        &= W^{T} S_{Wi} W \nonumber
+\end{align}
+
+where $U$ is a matrix of the same size as $X_i$ and all columns equal to $\mu_i$. Thus minimizing denominator of Fischers criterion causes an increasement of density samples from the same class. This enables easier linear separability.
+
+Equation [\ref{eq:Fischer_criterion}] can be also formulated as:
+
+\begin{equation}
+    S_{W}^{-1} S_{B} W = \lambda W
+\end{equation}
+
+This corresponds to finding eigenvalues and eigenvectors of $S_{W}^{-1} S_{B}$ matrix. Choosing $D$ eigenvectors with the largest corresponding eigenvalues as a base of the new space $\mathbb{R}^D$ guaranties good linear separability between classes. 
+
+\subsection{Convolutional Neural Networks}
+
+Convolutional Neural Network is a special type of neural network that is mainly based on the mathematical operation called convolution and the mechanism of pooling. Convolution in general is a linear operation on two functions of a real valued arguments. Let's assume that $x(t)$ is a function output of some operation that is performed on data $t$, which is usually called input and $w(t)$ is another operation that is called kernel. $s(t)$ is a convolution output that is sometimes referred as a feature map. Then we can define convolution as below:
+
+\begin{equation}
+    s(t) = (x*w)(t) = \int x(a)w(t-a)da
+\end{equation}
+
+In case of feature extraction CNNs mostly operate on discrete data, so discrete convolution can be defined as:
+
+\begin{equation}
+    s(t) = (x*w)(t) = \sum_{\alpha=-\infty}^{\infty} x(a)w(t-a)
+\end{equation}
+
+For two-dimensional data, like image I and kernel K we define convolution as:
+
+\begin{equation}
+    s(i, j) = (I*K)(i, j) = \sum_m \sum_n I(i-m, j-n)K(m, n)
+\end{equation}
+
+According to \cite{Goodfellow-et-al-2016}, convolution operation is used in the first of  the three main stages of convolutional layer. This stage produces a set of linear activations by performing several convolutions in parallel. Second stage, sometimes called the detector stage, is responsible for passing linear activations through a nonlinear activation function, such as the rectified linear activation function. The last stage is based on a pooling function, which modifies the output of layer further. This function replaces the network output at certain location with a summary statistic of the nearby outputs. In some cases convolution, detector, and pooling stages are considered as separated network layers.
 
 \section{Experimental settings}
 
-\subsection{Dataset describtion}
+\subsection{Data sets description}
+
+\textsl{No free lunch theorems for Optimization} \cite{no-free-lunch} states that there is no general algorithm suited to solve all problems. Machine learning algorithms accuracy may depend on the application and the character of used data \cite{alppaydin}. For that reason datasets containing faces were chosen in order to perform comparison of selected extraction methods. These kind of datasets contain a lot of samples. Each sample contain many features, what suits the criterion of broad and deep datasets. Each pixel in image can be considered as a separate dimension. Chosen datasets are compared in table \ref{tab:datasets}.
+
+\begin{table}[!h]
+    \centering
+    \caption{Comparison of datasets.}
+    \begin{tabular}{|c|c|c|c|}
+         \hline
+         dataset & \thead{number of\\ images} & \thead{approximate\\ number of\\ images per subject} & source \\
+         \hline
+         Specs on Faces & 42,592 & >100 & \cite{afifi2017afif4} \\
+         \hline
+         JAFFE & 213 & 20 & \cite{JAFFE} \\
+         \hline
+         Caltech Faces 1999 & 450 & 16 & \cite{CaltechFaces} \\
+         \hline
+         Georgia Tech & 750 & 15 & \cite{georgia_tech_face_database} \\
+         \hline
+         UMist-Faces & 576 & 30 & \cite{UMist-Faces} \\
+         \hline
+         Stirling faces & 312 & 9 & \cite{Stirling_faces} \\
+         \hline
+         VidTIMIT & 94600 & >100 & \cite{VidTIMIT} \\
+         \hline
+         muct & 3755 & 15 & \cite{Milborrow10} \\
+         \hline
+         yale & 330 & 22 & \cite{yale} \\
+         \hline
+         AT\&T Database & 400 & 10 & \cite{TheDatabaseOfFaces} \\
+         \hline
+         MIT-CBCL  & 2000 & 200 & \cite{FaceRecognitionDatabase} \\
+         \hline
+         Essex Collection & 7900 & 20 & \cite{essex} \\
+          \hline
+    \end{tabular}
+    \label{tab:datasets}
+\end{table}
+
+All images in chosen datasets contain varying lightning conditions, emotion expressions, face angles, varying ethnicity, sex and age of the subjects. Pictures were converted to the grayscale before performing feature extraction. 
+
+\subsection{Experiment description}
+
+PCA, LDA, and CNN-based feature extraction methods and classifiers were trained using same training set. Models were evaluated using 10-fold stratified cross validation, which guarantee, that both training and test sets contain proportional number of images for each class. Accuracy was chosen as measure. The results for given classifier were given as an fold-wise average of all results obtained via cross validation.
+
+Classifiers used for comparison of feature extraction methods were Neural Network and Svc. All classifiers hyperparameters were fixed during whole experiment. Searching for the best hyperparameters for each dataset and extraction method could compromise gathered results of experiment.
+
+Analysis of results was performed using Friedman test with Nemenyi post-hoc test, as suggested in \cite{demsar}.
 
 \section{Results}
 
-\section{Conclusion}
+\section{Conclusions}
 
-\newpage
-\begin{thebibliography}{9}
 
-\bibitem{LDA}
-R. A. FISHER, Sc.D, 1936
-'The Use of Multiple Measurements in Taxonomic Problems', 
-IEEE Transactions on Biomedical Engineering (to appear).
-
-\bibitem{multi_LDA}
-C. Radhakrishna Rao, Duckworth laboratory, Univesity Museum of Archaeology and Ethnology, Cambridge
-'The Utilization of Multiple Measurements in Problems of Biological Classification'
-Journal of the Royal Statistical Society. Series B. Vol. 10, No. 2 (1948), pp. 159-203
-
-\end{thebibliography}
-\newpage
+\bibliographystyle{plabbrv}
+\bibliography{bibliography}
 
 \end{document}
