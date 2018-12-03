@@ -6,15 +6,5 @@ preprocessedDb
 processedImages
 log
 .vscode
-doc/main.bbl
-doc/main.blg
-doc/main.dvi
-doc/*.aux
-doc/*.lof
-doc/*.log
-doc/*.pdf
-doc/*.synctex.gz
-doc/*.toc
-doc/*.lot
 *__pycache__
 */__pycache__
