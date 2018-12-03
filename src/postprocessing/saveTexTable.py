@@ -1,11 +1,11 @@
-
+from postprocessing.utils import getFirstItemFromDict
 
 class SaveTexTable:
 
     def saveTable(self, results, selector, fileName):
         rowsList = [[" "]]
 
-        for name, _ in results["PCA"].items():
+        for name, _ in getFirstItemFromDict(results).items():
             rowsList[0].append(name)
 
         for extractionName, extractionResults in results.items():

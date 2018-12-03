@@ -1,10 +1,12 @@
+from postprocessing.utils import getFirstItemFromDict
+
 import matplotlib.pyplot as plt
 import numpy as np
 
 class SavePlot:
 
     def saveBarPlot(self, dataDict, fileName, labels, ylabel=None, title=None, setLogScale=False):
-        numberOfGroups = len(dataDict["Svm"])
+        numberOfGroups = len(getFirstItemFromDict(dataDict))
         numberOfBarsInGroup = len(dataDict.items())
 
         barWidth = 0.1

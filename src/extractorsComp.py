@@ -1,23 +1,24 @@
-from sklearn import svm
-from sklearn.neural_network import MLPClassifier
+from extractors import *
 
 from sklearn.model_selection import cross_validate
 from sklearn.pipeline import make_pipeline
 
 
-class ClassifiersComparison:
+class ExtractorComparison:
 
     def __init__(self):
-        self.classifiersDict = {
-            'NN': MLPClassifier(solver='adam', alpha=1e-5, hidden_layer_sizes=(300, 200, 150), random_state=1),
-            'Svm': svm.LinearSVC()
+        self.extractorsDict = {
+            'LDA': Lda.Lda,
+            'PCA': Pca.Pca,
         }
 
 
-    def compareClassifiers(self, extractor, data, target):
+    def compareExtractors(self, classifier, data, target):
         results = {}
-        for name, classifier in self.classifiersDict.items():
+        for name, extractionMethod in self.extractorsDict.items():
             print(name)
+            extractor = extractionMethod(data, target)
+
             clf = make_pipeline(extractor, classifier)
             result = self.crossValidate(clf, data, target)
             results[name] = result

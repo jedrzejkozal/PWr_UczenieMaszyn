@@ -1,6 +1,7 @@
 from postprocessing.saveTexTable import SaveTexTable
 from postprocessing.savePlot import SavePlot
 from postprocessing.anovaAnalysis import AnovaAnalysis
+from postprocessing.utils import getFirstItemFromDict
 #from saveTexTable import SaveTexTable
 #from savePlot import SavePlot
 #from anovaAnalysis import AnovaAnalysis
@@ -21,7 +22,7 @@ class ProcessResults:
         classifiersResult = self.getDictWith(results, self.avrgTestScoreSelector)
         self.savePlot.saveBarPlot(classifiersResult, "accuracy_comparison", labels, ylabel='Dokładność')
 
-        self.numberOfExtractionMethods = len(classifiersResult["Svm"])
+        self.numberOfExtractionMethods = len(getFirstItemFromDict(classifiersResult))
         self.numberOfClassifiers = len(classifiersResult.items())
 
         fitTimes = self.getDictWith(results, self.fitTimeSelector)
@@ -88,7 +89,7 @@ class ProcessResults:
 
     def saveTableWithPvalie(self, results, errorTables, classifiersLabels, extractorLabels):
         tableToSave = [["metoda ekstrakcji"], ["p-wartość"], ["wartość statystyki F"]]
-        for name, _ in results["PCA"].items():
+        for name, _ in getFirstItemFromDict(results).items():
             tableToSave[0].append(name)
 
         for classifierName, errorTableForClassfier in zip(classifiersLabels, errorTables):

@@ -9,10 +9,11 @@ import os
 
 
 class Db:
-    def __init__(self, saveImages = False):
+    def __init__(self, dataBaseName, saveImages = False):
         self.__saveImages = saveImages
         self.__numClasses = 10
         self.__outputImgSideLen = 100
+        self.__dataBaseName = dataBaseName
 
     def getGrayscale(self):
         noOp = lambda img : img
@@ -30,7 +31,7 @@ class Db:
         y = []
 
         for classId in range(self.__numClasses):
-            directory = "../db/" + str(classId)
+            directory = "../db/" + self.__dataBaseName + "/" + str(classId)
 
             filesInDir = os.listdir(directory)
             shuffle(filesInDir)
