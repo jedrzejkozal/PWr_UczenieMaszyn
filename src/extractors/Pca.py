@@ -1,0 +1,22 @@
+#https://www.kaggle.com/hamishdickson/preprocessing-images-with-dimensionality-reduction
+
+from sklearn.decomposition import PCA
+import numpy as np
+from utils import flatten
+
+class Pca:
+    def __init__(self, xTrain, yTrain):
+        varianceThreshold = 0.95
+        self.__engine = PCA()
+
+        xFlat = flatten(xTrain)
+        self.__engine.fit(xFlat)
+        cumsum = np.cumsum(self.__engine.explained_variance_ratio_)
+        numFeatures = np.argmax(cumsum >= varianceThreshold) + 1
+
+        self.__engine = PCA(n_components = numFeatures)
+        self.__engine.fit(xFlat)
+
+    def transform(self, x):
+        xFlat = flatten(x)
+        return self.__engine.transform(xFlat)
