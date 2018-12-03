@@ -1,6 +1,6 @@
 from postprocessing.saveTexTable import SaveTexTable
 from postprocessing.savePlot import SavePlot
-from postprocessing.anovaAnalysis import AnovaAnalysis
+from postprocessing.statiscalAnalysis import StatiscalAnalysis
 from postprocessing.utils import getFirstItemFromDict
 #from saveTexTable import SaveTexTable
 #from savePlot import SavePlot
@@ -13,7 +13,7 @@ class ProcessResults:
     def __init__(self):
         self.saveTable = SaveTexTable()
         self.savePlot = SavePlot()
-        self.anova = AnovaAnalysis()
+        self.statiscal = StatiscalAnalysis()
 
 
     def process(self, results, classifierName):
@@ -95,7 +95,7 @@ class ProcessResults:
             tableToSave[0].append(name)
 
         for classifierName, errorTableForClassfier in zip(classifiersLabels, errorTables):
-            statistic, pvalue = self.anova.test_null_hipotesis(classifierName,
+            statistic, pvalue = self.statiscal.test_null_hipotesis(classifierName,
                 extractorLabels, errorTableForClassfier)
             tableToSave[1].append('{:7e}'.format(pvalue))
             tableToSave[2].append('{0:.2f}'.format(statistic))

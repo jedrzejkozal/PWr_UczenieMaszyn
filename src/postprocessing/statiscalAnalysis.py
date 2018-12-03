@@ -2,7 +2,7 @@ import scipy.stats as stats
 import numpy as np
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
 
-class AnovaAnalysis:
+class StatiscalAnalysis:
 
     def __init__(self):
         pass
@@ -13,8 +13,9 @@ class AnovaAnalysis:
         #please forgive me, stats.f_oneway dosn't accept list of lists or tuple
         a = errorTable[0]
         b = errorTable[1]
+        c = errorTable[0]
 
-        statistic, pvalue = stats.f_oneway(a, b)
+        statistic, pvalue = stats.friedmanchisquare(a, b, c)
 
         print("="*40)
         print(classifierName)
