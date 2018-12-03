@@ -17,6 +17,25 @@ class Pca:
         self.__engine = PCA(n_components = numFeatures)
         self.__engine.fit(xFlat)
 
+
+    def fit(self, xTrain, yTrain):
+        varianceThreshold = 0.95
+        self.__engine = PCA()
+
+        xFlat = flatten(xTrain)
+        self.__engine.fit(xFlat)
+        cumsum = np.cumsum(self.__engine.explained_variance_ratio_)
+        numFeatures = np.argmax(cumsum >= varianceThreshold) + 1
+
+        self.__engine = PCA(n_components = numFeatures)
+        self.__engine.fit(xFlat)
+
+
     def transform(self, x):
         xFlat = flatten(x)
         return self.__engine.transform(xFlat)
+
+
+    def fit_transform(self, x, y):
+        self.fit(x,y)
+        return self.transform(x)

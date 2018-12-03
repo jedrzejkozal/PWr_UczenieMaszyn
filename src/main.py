@@ -15,9 +15,6 @@ if __name__ == "__main__":
 
     x, y = Db().getGrayscale()
 
-    xTrainExtrator, x, yTrainExtrator, y = \
-        train_test_split(x, y, test_size=0.8, random_state=42)
-
     classifiersComparision = ClassifiersComparison()
     processResults = ProcessResults()
 
@@ -27,14 +24,9 @@ if __name__ == "__main__":
         print("="*40)
         print("Extractor: {}".format(name))
 
-        if name == 'RPCA':
-            extractor = extractionMethod(x, y)
-        else:
-            extractor = extractionMethod(xTrainExtrator, yTrainExtrator)
+        extractor = extractionMethod(x, y)
 
-        xExtracted = extractor.transform(x)
-
-        result = classifiersComparision.compareClassifiers(xExtracted, y)
+        result = classifiersComparision.compareClassifiers(extractor, x, y)
         results[name] = result
 
     processResults.process(results)

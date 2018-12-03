@@ -1,10 +1,8 @@
 from sklearn import svm
 from sklearn.neural_network import MLPClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn import neighbors
-from sklearn.ensemble import RandomForestClassifier
 
 from sklearn.model_selection import cross_validate
+from sklearn.pipeline import make_pipeline
 
 
 class ClassifiersComparison:
@@ -15,16 +13,19 @@ class ClassifiersComparison:
             'Svm': svm.LinearSVC()
         }
 
-    def compareClassifiers(self, data, target):
+
+    def compareClassifiers(self, extractor, data, target):
         results = {}
         for name, classifier in self.classifiersDict.items():
             print(name)
-            result = self.crossValidate(classifier, data, target)
+            clf = make_pipeline(extractor, classifier)
+            result = self.crossValidate(clf, data, target)
             results[name] = result
         return results
 
+
     def crossValidate(self, classifier, data, target):
-        k = 10
-        scores = cross_validate(classifier, data, target, cv=k)
+        K = 10
+        scores = cross_validate(classifier, data, target, cv=K)
         print(scores["test_score"].mean())
         return scores
