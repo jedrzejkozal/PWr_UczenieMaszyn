@@ -16,23 +16,25 @@ class ProcessResults:
         self.anova = AnovaAnalysis()
 
 
-    def process(self, results):
+    def process(self, results, classifierName):
         labels = self.getExtractorsLabels(results)
 
         classifiersResult = self.getDictWith(results, self.avrgTestScoreSelector)
-        self.savePlot.saveBarPlot(classifiersResult, "accuracy_comparison", labels, ylabel='Dokładność')
+        self.savePlot.saveBarPlot(classifiersResult, classifierName+"_accuracy_comparison",
+            labels, ylabel='Accuracy')
 
         self.numberOfExtractionMethods = len(getFirstItemFromDict(classifiersResult))
         self.numberOfClassifiers = len(classifiersResult.items())
 
         fitTimes = self.getDictWith(results, self.fitTimeSelector)
-        self.savePlot.saveBarPlot(fitTimes, "fit_time_comparison", labels, ylabel='Czas trenowania',
+        self.savePlot.saveBarPlot(fitTimes, classifierName+"_fit_time_comparison",
+            labels, ylabel='Traning time',
             setLogScale=True)
 
-        self.saveTable.saveTable(results, self.avrgTestScoreSelector, "acc_table")
-        self.saveTable.saveTable(results, self.fitTimeSelector, "fit_time_table")
+        self.saveTable.saveTable(results, self.avrgTestScoreSelector, classifierName+"_acc_table")
+        self.saveTable.saveTable(results, self.fitTimeSelector, classifierName+"_fit_time_table")
 
-        self.doStatisticalAnalysis(results)
+        self.doStatisticalAnalysis(results, classifierName)
 
 
     def avrgTestScoreSelector(self, scores):
@@ -84,10 +86,10 @@ class ProcessResults:
         classifiersLabels = self.getClassifiersLabels(results)
         extractorLabels = self.getExtractorsLabels(results)
 
-        self.saveTableWithPvalie(results, errorTables, classifiersLabels, extractorLabels)
+        self.saveTableWithPvalie(results, errorTables, classifiersLabels, extractorLabels, classifierName)
 
 
-    def saveTableWithPvalie(self, results, errorTables, classifiersLabels, extractorLabels):
+    def saveTableWithPvalie(self, results, errorTables, classifiersLabels, extractorLabels, classifierName):
         tableToSave = [["metoda ekstrakcji"], ["p-wartość"], ["wartość statystyki F"]]
         for name, _ in getFirstItemFromDict(results).items():
             tableToSave[0].append(name)
@@ -98,7 +100,7 @@ class ProcessResults:
             tableToSave[1].append('{:7e}'.format(pvalue))
             tableToSave[2].append('{0:.2f}'.format(statistic))
 
-        self.saveTable.saveTexTable(tableToSave, "pvalues")
+        self.saveTable.saveTexTable(tableToSave, classifierName+"_pvalues")
 
 
     def getErrorTableForAllClassifiers(self, results):

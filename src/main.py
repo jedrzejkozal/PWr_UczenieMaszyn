@@ -7,7 +7,7 @@ from sklearn.neural_network import MLPClassifier
 
 
 classifiersDict = {
-    'NN': MLPClassifier(solver='adam', alpha=1e-5, hidden_layer_sizes=(300, 200, 150), random_state=1),
+    #'NN': MLPClassifier(solver='adam', alpha=1e-5, hidden_layer_sizes=(300, 200, 150), random_state=1),
     'Svm': svm.LinearSVC()
 }
 
@@ -41,4 +41,4 @@ if __name__ == "__main__":
             result = extractorComparision.compareExtractors(classifier, x, y)
             results[dbName] = result
 
-        processResults.process(results)
+        processResults.process(results, classifierName)
