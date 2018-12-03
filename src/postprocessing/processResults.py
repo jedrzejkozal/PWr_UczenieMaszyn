@@ -90,7 +90,7 @@ class ProcessResults:
 
 
     def saveTableWithPvalie(self, results, errorTables, classifiersLabels, extractorLabels, classifierName):
-        tableToSave = [["metoda ekstrakcji"], ["p-wartość"], ["wartość statystyki F"]]
+        tableToSave = [["feature extraction method"], ["p-value"], ["value of statistic F"]]
         for name, _ in getFirstItemFromDict(results).items():
             tableToSave[0].append(name)
 

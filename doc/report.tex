@@ -236,6 +236,41 @@ Analysis of results was performed using Friedman test with Nemenyi post-hoc test
 
 \section{Results}
 
+\begin{figure*}
+    \centering
+    \includegraphics[scale=0.8]{images/Svm_accuracy_comparison.png}
+    \caption{Comparison of avrage accuracy of Svc classifier for chosen FE methods and datasets}
+    \label{fig:svm_acc_comparision}
+\end{figure*}
+
+\begin{figure*}
+    \centering
+    \includegraphics[scale=0.8]{images/Svm_fit_time_comparison.png}
+    \caption{Comparison of avrage time of traning Svc classifier for chosen FE methods and datasets}
+    \label{fig:svm_fit_time_comparision}
+\end{figure*}
+
+\begin{table*}
+    \centering
+    \caption{Comparison of p-values and F-values for ANOVA test for Svc classifier}
+    \input{tables/Svm_pvalues.tex}
+    \label{table:svm_pvalues}
+\end{table*}
+
+\begin{table}[t]
+    \centering
+    \caption{Comparison of avrage accuracy of Svc classifier for chosen FE methods and datasets}
+    \input{tables/Svm_acc_table.tex}
+    \label{table:svm_acc_comparison}
+\end{table}
+
+\begin{table}
+    \centering
+    \caption{Comparison of avrage time of traning Svc classifier for chosen FE methods and datasets}
+    \input{tables/Svm_fit_time_table.tex}
+    \label{table:svm_fit_time_comparison}
+\end{table}
+
 \section{Conclusions}
 
 
