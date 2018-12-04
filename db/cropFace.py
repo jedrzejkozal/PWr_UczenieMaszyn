@@ -27,27 +27,37 @@ def cropImgToFace(image):
 
 
 def saveImg(img, directory):
-    pass
+    cv2.imwrite(directory, img)
+
+
+def createDirectory(dir):
+    try:
+        os.mkdir(dir)
+    except FileExistsError:
+        print("{} directory already exist".format(dir))
 
 
 def processAllImgsInDirectory(directory):
+    createDirectory("croped_" + directory)
     classesFolders = os.listdir(directory)
     for classDir in range(len(classesFolders)-1):
 
         imagesDir = directory + str(classDir)
         imagesInDir = os.listdir(imagesDir)
+        createDirectory("croped_"+imagesDir)
+        print("dir to create: ", "croped_"+imagesDir)
 
         for file in imagesInDir:
             filePath = os.path.join(imagesDir, file)
 
-            print("filePath: ", filePath)
+            #print("filePath: ", filePath)
             if filePath[-9:] == ".DS_Store":
                 continue
             img = cv2.imread(filePath)
             face = cropImgToFace(img)
 
             saveDir = "croped_" + filePath
-            print("saveDir: ", saveDir)
+            #print("saveDir: ", saveDir)
             saveImg(face, saveDir)
 
 
