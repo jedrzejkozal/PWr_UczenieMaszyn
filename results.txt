@@ -1,0 +1,99 @@
+results:  {'att:': {'CNN': {'fit_time': array([11.03159833,  9.43891048, 11.51552796, 10.18807745, 10.96223426,
+        9.43656993, 10.38583326,  8.13684344,  8.43562913,  8.86446977]), 'score_time': array([0.20947242, 0.08186316, 0.08239341, 0.096807  , 0.10653687,
+       0.08275127, 0.08415985, 0.12087321, 0.08235669, 0.08321261]), 'test_score': array([1.   , 0.95 , 0.975, 0.975, 1.   , 0.975, 0.975, 0.975, 1.   ,
+       0.975]), 'train_score': array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.])}, 'LDA': {'fit_time': array([1.41842341, 0.57994938, 0.5938251 , 0.5766201 , 0.58544898,
+       0.57467461, 0.57709408, 0.5818243 , 0.57771087, 0.57656908]), 'score_time': array([0.0016768 , 0.00180936, 0.0016849 , 0.00174069, 0.00172281,
+       0.00174475, 0.0016942 , 0.0017004 , 0.0019567 , 0.00174117]), 'test_score': array([0.975, 0.975, 0.95 , 0.975, 1.   , 0.9  , 0.925, 1.   , 0.975,
+       0.925]), 'train_score': array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.])}, 'PCA': {'fit_time': array([3.20032692, 3.09593439, 3.08234692, 3.05247974, 3.06791973,
+       3.08019018, 3.05916905, 3.05371237, 3.05990624, 3.08658624]), 'score_time': array([0.00383258, 0.0038023 , 0.00378156, 0.00379205, 0.00399995,
+       0.00389862, 0.00382471, 0.00381351, 0.00409722, 0.00377369]), 'test_score': array([0.65 , 0.425, 0.625, 0.625, 0.525, 0.6  , 0.6  , 0.575, 0.575,
+       0.6  ]), 'train_score': array([0.67777778, 0.70277778, 0.73888889, 0.70833333, 0.725     ,
+       0.68055556, 0.74722222, 0.67777778, 0.70555556, 0.75555556])}}, 'hands digits:': {'CNN': {'fit_time': array([42.53244829, 49.19793844, 36.25353336, 34.91302633, 41.30446672,
+       36.33605337, 35.27765799, 41.58963823, 35.06762385, 36.33633089]), 'score_time': array([0.37187362, 0.38007116, 0.38559365, 0.46015167, 0.41219306,
+       0.38103819, 0.61833334, 0.57868195, 0.55281138, 0.46401048]), 'test_score': array([0.9047619 , 0.91904762, 0.8952381 , 0.90952381, 0.85645933,
+       0.93269231, 0.91176471, 0.92039801, 0.915     , 0.855     ]), 'train_score': array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.])}, 'LDA': {'fit_time': array([5.89214969, 5.82016611, 5.80933046, 5.80975747, 5.89546108,
+       5.89757514, 5.92488861, 5.9542532 , 5.94792581, 5.95385313]), 'score_time': array([0.00522351, 0.00527334, 0.00528502, 0.00525832, 0.00531936,
+       0.0052433 , 0.00516224, 0.00540638, 0.00502157, 0.00500083]), 'test_score': array([0.6047619 , 0.6       , 0.56190476, 0.61428571, 0.58851675,
+       0.58653846, 0.54411765, 0.60696517, 0.625     , 0.575     ]), 'train_score': array([0.97894168, 0.97948164, 0.98164147, 0.97516199, 0.97517539,
+       0.97411003, 0.97900969, 0.9763568 , 0.98066595, 0.97583244])}, 'PCA': {'fit_time': array([5.16887665, 5.14777327, 5.14280534, 5.15934634, 5.15681195,
+       5.17026496, 5.1800704 , 5.18697619, 5.19026399, 5.16693854]), 'score_time': array([0.01068687, 0.01065254, 0.01084065, 0.01049709, 0.01050973,
+       0.0103755 , 0.01023197, 0.01020217, 0.01016688, 0.01007366]), 'test_score': array([0.35714286, 0.35238095, 0.38571429, 0.3047619 , 0.44019139,
+       0.33653846, 0.39705882, 0.34825871, 0.395     , 0.4       ]), 'train_score': array([0.36717063, 0.43844492, 0.41036717, 0.36663067, 0.40205073,
+       0.38673139, 0.43057051, 0.3777539 , 0.41245972, 0.44253491])}}, 'caltec:': {'CNN': {'fit_time': array([10.31250095, 10.84080458,  9.73523283, 10.94124317, 10.35937667,
+        9.53476334, 13.46690011,  9.14643836, 11.72693682, 11.15893197]), 'score_time': array([0.11031628, 0.09437656, 0.09006786, 0.09193182, 0.08723164,
+       0.08306646, 0.09000421, 0.09281301, 0.08285832, 0.07965088]), 'test_score': array([1.        , 0.90909091, 1.        , 1.        , 1.        ,
+       1.        , 1.        , 0.97368421, 0.97222222, 1.        ]), 'train_score': array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.])}, 'LDA': {'fit_time': array([0.51189065, 0.38740373, 0.39497137, 0.40387559, 0.38954949,
+       0.39303899, 0.42684627, 0.4304688 , 0.41788006, 0.43553805]), 'score_time': array([0.00167942, 0.00160789, 0.00150228, 0.0014751 , 0.00141335,
+       0.00140738, 0.00140476, 0.0014565 , 0.00136018, 0.00128794]), 'test_score': array([1.        , 1.        , 0.95121951, 1.        , 1.        ,
+       1.        , 1.        , 0.97368421, 1.        , 1.        ]), 'train_score': array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.])}, 'PCA': {'fit_time': array([1.161165  , 1.19540787, 1.19914317, 1.21363544, 1.21463013,
+       1.19185853, 1.22198987, 1.1978116 , 1.22087574, 1.22295547]), 'score_time': array([0.00417161, 0.00399399, 0.00389504, 0.00378656, 0.00380421,
+       0.00382376, 0.00386524, 0.00379324, 0.00373006, 0.00358891]), 'test_score': array([0.89795918, 0.93181818, 0.97560976, 0.975     , 0.95      ,
+       0.94871795, 0.92105263, 0.84210526, 0.88888889, 0.88235294]), 'train_score': array([0.98285714, 0.98873239, 0.99441341, 0.99164345, 0.98885794,
+       0.98055556, 0.98891967, 0.98614958, 0.98898072, 0.9890411 ])}}}
+========================================
+Comparison of extractors over multiple datasets result
+statistic:  110.0
+pvalue:  1.2995814250075e-24
+Rejecting H0: no evidence to support hypothesis
+res:
+          0         1         2
+0 -1.000000  0.900000  0.102525
+1  0.900000 -1.000000  0.232041
+2  0.102525  0.232041 -1.000000
+res:
+          0         1         2
+0 -1.000000  0.900000  0.102525
+1  0.900000 -1.000000  0.232041
+2  0.102525  0.232041 -1.000000
+========================================
+
+
+
+
+
+/home/jkozal/anaconda3/lib/python3.6/site-packages/sklearn/discriminant_analysis.py:442: UserWarning: The priors do not sum to 1. Renormalizing
+  UserWarning)
+Traceback (most recent call last):
+  File "main.py", line 45, in <module>
+    db.numClasses)
+  File "/home/jkozal/Dokumenty/PWr/semestr_II/Uczenie_Maszyn/MachineLearning/src/extractorsComp.py", line 24, in compareExtractors
+    result = self.crossValidate(clf, data, target)
+  File "/home/jkozal/Dokumenty/PWr/semestr_II/Uczenie_Maszyn/MachineLearning/src/extractorsComp.py", line 31, in crossValidate
+    scores = cross_validate(classifier, data, target, cv=K)
+  File "/home/jkozal/anaconda3/lib/python3.6/site-packages/sklearn/model_selection/_validation.py", line 206, in cross_validate
+    for train, test in cv.split(X, y, groups))
+  File "/home/jkozal/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py", line 779, in __call__
+    while self.dispatch_one_batch(iterator):
+  File "/home/jkozal/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py", line 625, in dispatch_one_batch
+    self._dispatch(tasks)
+  File "/home/jkozal/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py", line 588, in _dispatch
+    job = self._backend.apply_async(batch, callback=cb)
+  File "/home/jkozal/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 111, in apply_async
+    result = ImmediateResult(func)
+  File "/home/jkozal/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 332, in __init__
+    self.results = batch()
+  File "/home/jkozal/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py", line 131, in __call__
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "/home/jkozal/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py", line 131, in <listcomp>
+    return [func(*args, **kwargs) for func, args, kwargs in self.items]
+  File "/home/jkozal/anaconda3/lib/python3.6/site-packages/sklearn/model_selection/_validation.py", line 458, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/home/jkozal/anaconda3/lib/python3.6/site-packages/sklearn/pipeline.py", line 248, in fit
+    Xt, fit_params = self._fit(X, y, **fit_params)
+  File "/home/jkozal/anaconda3/lib/python3.6/site-packages/sklearn/pipeline.py", line 213, in _fit
+    **fit_params_steps[name])
+  File "/home/jkozal/anaconda3/lib/python3.6/site-packages/sklearn/externals/joblib/memory.py", line 362, in __call__
+    return self.func(*args, **kwargs)
+  File "/home/jkozal/anaconda3/lib/python3.6/site-packages/sklearn/pipeline.py", line 581, in _fit_transform_one
+    res = transformer.fit_transform(X, y, **fit_params)
+  File "/home/jkozal/Dokumenty/PWr/semestr_II/Uczenie_Maszyn/MachineLearning/src/extractors/Lda.py", line 23, in fit_transform
+    self.fit(x,y)
+  File "/home/jkozal/Dokumenty/PWr/semestr_II/Uczenie_Maszyn/MachineLearning/src/extractors/Lda.py", line 14, in fit
+    self.__engine.fit(xFlat, yFlat)
+  File "/home/jkozal/anaconda3/lib/python3.6/site-packages/sklearn/discriminant_analysis.py", line 455, in fit
+    self._solve_svd(X, y)
+  File "/home/jkozal/anaconda3/lib/python3.6/site-packages/sklearn/discriminant_analysis.py", line 384, in _solve_svd
+    U, S, V = linalg.svd(X, full_matrices=False)
+  File "/home/jkozal/anaconda3/lib/python3.6/site-packages/scipy/linalg/decomp_svd.py", line 129, in svd
+    full_matrices=full_matrices, overwrite_a=overwrite_a)
+MemoryError

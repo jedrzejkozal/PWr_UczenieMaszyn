@@ -12,10 +12,10 @@ classifiersDict = {
 }
 
 dataBaseDict = {
-    #'att:': Db("att", 40), #should  work
-    #'hands digits:': Db("hands", 10), # should work
-    #'caltec:': Db("croped_caltec", 19), # should work
-    'essex:': Db("essex", 392) # should work
+    'att:': Db("att", 40), #should  work
+    'hands digits:': Db("hands", 10), # should work
+    'caltec:': Db("croped_caltec", 19), # should work
+    #'essex:': Db("essex", 392), # should work, note: on my 8Gb RAM essex causes MemoryError
     #'georgia': Db("georgia", 50),
 }
 
