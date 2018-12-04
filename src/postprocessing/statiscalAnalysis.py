@@ -13,8 +13,7 @@ class StatiscalAnalysis:
         #please forgive me, stats.f_oneway dosn't accept list of lists or tuple
         a = errorTable[0]
         b = errorTable[1]
-        #c = errorTable[2]
-        c = [0.0, 100.0]
+        c = errorTable[2]
 
         statistic, pvalue = stats.friedmanchisquare(a, b, c)
         self.printNullHypothesisResults(statistic, pvalue)
@@ -52,8 +51,8 @@ class StatiscalAnalysis:
 
 
     def doPostHocTesting(self, errorTable):
-        print("errorTable: ", errorTable)
         x = np.array(errorTable)
+        x = x[:, 0, :]
         res = sp.posthoc_nemenyi_friedman(x)
         print("res:")
         print(res)

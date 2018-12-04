@@ -9,8 +9,7 @@ import os
 
 
 class Db:
-    def __init__(self, dataBaseName, saveImages = False):
-        self.__saveImages = saveImages
+    def __init__(self, dataBaseName):
         self.__numClasses = 10
         self.__outputImgSideLen = 100
         self.__dataBaseName = dataBaseName
@@ -18,13 +17,6 @@ class Db:
     def getGrayscale(self):
         noOp = lambda img : img
         return self.__transform(noOp)
-
-    def getThresholed(self):
-        return self.__transform(contourSearching.extractThresholdedPalm)
-
-    def getSkeletonized(self):
-        extractSkeleton = lambda img : skeletonizeImg.skeletonize(contourSearching.extractThresholdedPalm(img))
-        return self.__transform(extractSkeleton)
 
     def __transform(self, processOneImg):
         x = []
@@ -48,9 +40,6 @@ class Db:
 
                 outputImgSize = (self.__outputImgSideLen, self.__outputImgSideLen)
                 imgProcessed = cv2.resize(imgProcessed, outputImgSize, interpolation = cv2.INTER_NEAREST )
-
-                if self.__saveImages:
-                    saveImg("log/processedImages/" + str(classId), file, imgProcessed)
 
                 x.append(imgProcessed)
                 y.append(classId)

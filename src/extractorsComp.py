@@ -8,6 +8,7 @@ class ExtractorComparison:
 
     def __init__(self):
         self.extractorsDict = {
+            'CNN': Cnn.Cnn,
             'LDA': Lda.Lda,
             'PCA': Pca.Pca,
         }

@@ -1,4 +1,3 @@
-#from sklearn.lda import LDA
 from sklearn.discriminant_analysis import  LinearDiscriminantAnalysis as LDA
 import numpy as np
 from utils import flatten
