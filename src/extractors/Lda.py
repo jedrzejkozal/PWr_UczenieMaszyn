@@ -8,10 +8,6 @@ class Lda:
     def __init__(self, xTrain, yTrain):
         self.__engine = LDA(n_components=100)
 
-        xFlat = self.flatten(xTrain)
-        yFlat = np.array(yTrain, dtype="float64")
-        self.__engine.fit(xFlat, yFlat)
-
 
     def fit(self, xTrain, yTrain):
         xFlat = self.flatten(xTrain)

@@ -9,6 +9,10 @@ from keras.utils import np_utils
 
 class Cnn:
     def __init__(self, xTrain, yTrain):
+        pass
+
+
+    def fit(self, xTrain, yTrain):
         xTrainCnn = self.__reshapeX(xTrain)
         yTrainCnn = self.__reshapeY(yTrain)
         self._engine = self.__trainModel(xTrainCnn, yTrainCnn)
@@ -22,6 +26,7 @@ class Cnn:
         print("Cnn model after removing classifying part:")
         print(self._engine.summary())
 
+
     def transform(self, x):
         xCnn = self.__reshapeX(x)
 
@@ -32,6 +37,12 @@ class Cnn:
             features.append(bathFeatures[0])
 
         return convertListOfNdarraysToNdarray(features)
+
+
+    def fit_transform(self, x, y):
+        self.fit(x,y)
+        return self.transform(x)
+        
 
     def __reshapeX(self, x):
         numOfChannels = 1

@@ -6,16 +6,7 @@ from utils import flatten
 
 class Pca:
     def __init__(self, xTrain, yTrain):
-        varianceThreshold = 0.95
-        self.__engine = PCA()
-
-        xFlat = flatten(xTrain)
-        self.__engine.fit(xFlat)
-        cumsum = np.cumsum(self.__engine.explained_variance_ratio_)
-        numFeatures = np.argmax(cumsum >= varianceThreshold) + 1
-
-        self.__engine = PCA(n_components = numFeatures)
-        self.__engine.fit(xFlat)
+        pass
 
 
     def fit(self, xTrain, yTrain):
