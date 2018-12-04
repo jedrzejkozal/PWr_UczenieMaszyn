@@ -5,14 +5,16 @@ import numpy as np
 from utils import flatten
 
 class Pca:
-    def __init__(self, xTrain, yTrain):
+    def __init__(self, xTrain, yTrain, numberOfClasses):
         pass
 
 
     def fit(self, xTrain, yTrain):
+        """
         varianceThreshold = 0.95
         self.__engine = PCA()
         xFlat = flatten(xTrain)
+        """
 
         """
         self.__engine.fit(xFlat)
@@ -22,6 +24,7 @@ class Pca:
         self.__engine = PCA(n_components = numFeatures)
         """
 
+        xFlat = flatten(xTrain)
         self.__engine = PCA(n_components=100)
         self.__engine.fit(xFlat)
 

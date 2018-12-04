@@ -12,8 +12,9 @@ classifiersDict = {
 }
 
 dataBaseDict = {
-    'hands digits:': Db("hands"),
-    'hands digits same:': Db("hands"),
+    'att:': Db("att", 40),
+    'hands digits:': Db("hands", 10),
+    #'georgia': Db("georgia", 50),
 }
 
 if __name__ == "__main__":
@@ -38,7 +39,8 @@ if __name__ == "__main__":
 
             x, y = db.getGrayscale()
 
-            result = extractorComparision.compareExtractors(classifier, x, y)
+            result = extractorComparision.compareExtractors(classifier, x, y,
+                db.numClasses)
             results[dbName] = result
 
         processResults.process(results, classifierName)

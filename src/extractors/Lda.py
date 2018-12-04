@@ -4,7 +4,7 @@ from utils import flatten
 
 class Lda:
 
-    def __init__(self, xTrain, yTrain):
+    def __init__(self, xTrain, yTrain, numberOfClasses):
         self.__engine = LDA(n_components=100)
 
 

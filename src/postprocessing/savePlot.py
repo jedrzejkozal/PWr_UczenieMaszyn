@@ -1,5 +1,5 @@
-#from postprocessing.utils import getFirstItemFromDict
-from utils import getFirstItemFromDict
+from postprocessing.utils import getFirstItemFromDict
+#from utils import getFirstItemFromDict
 
 import matplotlib.pyplot as plt
 import numpy as np

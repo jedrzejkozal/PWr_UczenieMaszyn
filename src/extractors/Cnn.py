@@ -8,8 +8,8 @@ from keras import optimizers
 from keras.utils import np_utils
 
 class Cnn:
-    def __init__(self, xTrain, yTrain):
-        pass
+    def __init__(self, xTrain, yTrain, numberOfClasses):
+        self.__numClasses = numberOfClasses
 
 
     def fit(self, xTrain, yTrain):
@@ -42,14 +42,14 @@ class Cnn:
     def fit_transform(self, x, y):
         self.fit(x,y)
         return self.transform(x)
-        
+
 
     def __reshapeX(self, x):
         numOfChannels = 1
         return x.reshape((x.shape[0], x.shape[1], x.shape[2], numOfChannels))
 
     def __reshapeY(self, y):
-        return np_utils.to_categorical(y, num_classes=10)
+        return np_utils.to_categorical(y, num_classes=self.__numClasses)
 
     def __removeLastLayers(self, numLayersToRemove):
         #https://github.com/keras-team/keras/issues/2371
@@ -87,7 +87,8 @@ class Cnn:
 
         cnn.add(Flatten())
         cnn.add(Dense(500, activation='relu'))
-        cnn.add(Dense(10, activation='softmax'))
+        #cnn.add(Dense(10, activation='softmax'))
+        cnn.add(Dense(self.__numClasses, activation='softmax'))
 
         cnn.compile(loss='categorical_crossentropy', optimizer = optimizers.Adadelta(), metrics = ['accuracy'])
         cnn.fit(xTrainCnn, yTrainCnn, batch_size = 200, epochs = 10)

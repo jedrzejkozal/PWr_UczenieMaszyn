@@ -14,11 +14,11 @@ class ExtractorComparison:
         }
 
 
-    def compareExtractors(self, classifier, data, target):
+    def compareExtractors(self, classifier, data, target, numberOfClasses):
         results = {}
         for name, extractionMethod in self.extractorsDict.items():
             print(name)
-            extractor = extractionMethod(data, target)
+            extractor = extractionMethod(data, target, numberOfClasses)
 
             clf = make_pipeline(extractor, classifier)
             result = self.crossValidate(clf, data, target)

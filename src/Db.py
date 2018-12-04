@@ -9,8 +9,8 @@ import os
 
 
 class Db:
-    def __init__(self, dataBaseName):
-        self.__numClasses = 10
+    def __init__(self, dataBaseName, numberOfClasses):
+        self.numClasses = numberOfClasses
         self.__outputImgSideLen = 100
         self.__dataBaseName = dataBaseName
 
@@ -22,7 +22,7 @@ class Db:
         x = []
         y = []
 
-        for classId in range(self.__numClasses):
+        for classId in range(self.numClasses):
             directory = "../db/" + self.__dataBaseName + "/" + str(classId)
 
             filesInDir = os.listdir(directory)

@@ -52,7 +52,7 @@ class StatiscalAnalysis:
 
     def doPostHocTesting(self, errorTable):
         x = np.array(errorTable)
-        x = x[:, 0, :]
+        x = np.transpose(x[:, 0, :])
         res = sp.posthoc_nemenyi_friedman(x)
         print("res:")
         print(res)
