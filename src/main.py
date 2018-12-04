@@ -12,8 +12,9 @@ classifiersDict = {
 }
 
 dataBaseDict = {
-    'att:': Db("att", 40),
-    'hands digits:': Db("hands", 10),
+    #'att:': Db("att", 40), #works
+    #'hands digits:': Db("hands", 10), # works
+    'caltec:': Db("croped_caltec", 19), #works
     #'georgia': Db("georgia", 50),
 }
 
