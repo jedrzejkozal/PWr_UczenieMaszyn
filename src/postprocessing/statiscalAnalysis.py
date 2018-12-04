@@ -1,6 +1,5 @@
 import scipy.stats as stats
 import numpy as np
-#from statsmodels.stats.multicomp import pairwise_tukeyhsd
 import scikit_posthocs as sp
 
 class StatiscalAnalysis:
@@ -50,20 +49,3 @@ class StatiscalAnalysis:
         res = sp.posthoc_nemenyi_friedman(errorTable)
         print("res:")
         print(res)
-
-
-    """
-    def convertErrorTableToSingleVector(self, errorTable, extractorLabels):
-        errorTable = np.array(errorTable)
-        result = errorTable.flatten()
-
-        shape = errorTable.shape[0]*errorTable.shape[1]
-        labels = []
-        for i, label in zip(range(len(extractorLabels)), extractorLabels):
-            for j in range(i*errorTable.shape[1], (i+1)*errorTable.shape[1]):
-                labels.append(label)
-
-        labels = np.array(labels)
-
-        return result, labels
-    """

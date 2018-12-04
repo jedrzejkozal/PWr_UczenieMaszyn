@@ -17,25 +17,25 @@ class ProcessResults:
         self.statiscal = StatiscalAnalysis()
 
 
-    def process(self, results, cllassifierName):
+    def process(self, results, classifierName):
         labels = self.getDatabasesLabels(results)
 
         extractorsResult = self.getDictWith(results, self.avrgTestScoreSelector)
-        self.savePlot.saveBarPlot(extractorsResult, cllassifierName+"_accuracy_comparison",
+        self.savePlot.saveBarPlot(extractorsResult, classifierName+"_accuracy_comparison",
             labels, ylabel='Accuracy')
 
         self.numberOfDatabases = len(getFirstItemFromDict(extractorsResult))
         self.numberOfExtractors = len(extractorsResult.items())
 
         fitTimes = self.getDictWith(results, self.fitTimeSelector)
-        self.savePlot.saveBarPlot(fitTimes, cllassifierName+"_fit_time_comparison",
+        self.savePlot.saveBarPlot(fitTimes, classifierName+"_fit_time_comparison",
             labels, ylabel='Traning time',
             setLogScale=True)
 
-        self.saveTable.saveTable(results, self.avrgTestScoreSelector, cllassifierName+"_acc_table")
-        self.saveTable.saveTable(results, self.fitTimeSelector, cllassifierName+"_fit_time_table")
+        self.saveTable.saveTable(results, self.avrgTestScoreSelector, classifierName+"_acc_table")
+        self.saveTable.saveTable(results, self.fitTimeSelector, classifierName+"_fit_time_table")
 
-        self.doStatisticalAnalysis(results, cllassifierName)
+        self.doStatisticalAnalysis(results, classifierName)
 
 
     def avrgTestScoreSelector(self, scores):
@@ -82,13 +82,13 @@ class ProcessResults:
         return labels
 
 
-    def doStatisticalAnalysis(self, results, cllassifierName):
+    def doStatisticalAnalysis(self, results, classifierName):
         errorTables = self.getErrorTableForAllExtractors(results)
         extractorsLabels = self.getExtractorsLabels(results)
         databaseLabels = self.getDatabasesLabels(results)
 
         self.saveTableWithPvalie(results, errorTables, extractorsLabels,
-            databaseLabels, cllassifierName)
+            databaseLabels, classifierName)
 
 
     def saveTableWithPvalie(self, results, errorTables, extractorsLabels, databaseLabels, extractorName):
