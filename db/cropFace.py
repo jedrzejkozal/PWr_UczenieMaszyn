@@ -7,6 +7,7 @@ def cropImgToFace(image):
     haarcascade_frontalface_default_path = os.path.join(ROOT_DIR,'haarcascade_frontalface_default.xml')
     faceCascade = cv2.CascadeClassifier(haarcascade_frontalface_default_path) # Create the haar cascade
 
+    #grayscale_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     grayscale_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     faces = faceCascade.detectMultiScale(grayscale_image,
@@ -31,15 +32,18 @@ def saveImg(img, directory):
 
 def processAllImgsInDirectory(directory):
     classesFolders = os.listdir(directory)
-    for classDir in range(len(classesFolders)):
+    for classDir in range(len(classesFolders)-1):
 
         imagesDir = directory + str(classDir)
         imagesInDir = os.listdir(imagesDir)
 
         for file in imagesInDir:
             filePath = os.path.join(imagesDir, file)
-            img = cv2.imread(filePath)
 
+            print("filePath: ", filePath)
+            if filePath[-9:] == ".DS_Store":
+                continue
+            img = cv2.imread(filePath)
             face = cropImgToFace(img)
 
             saveDir = "croped_" + filePath
