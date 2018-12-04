@@ -8,7 +8,7 @@ class StatiscalAnalysis:
         pass
 
 
-    def test_null_hipotesis(self, classifierName, extractorLabels, errorTable):
+    def testNullHypothesis(self, extractorName, errorTable):
 
         #please forgive me, stats.f_oneway dosn't accept list of lists or tuple
         a = errorTable[0]
@@ -16,23 +16,29 @@ class StatiscalAnalysis:
         c = errorTable[0]
 
         statistic, pvalue = stats.friedmanchisquare(a, b, c)
-
-        print("="*40)
-        print(classifierName)
-        print("statistic: ", statistic)
-        print("pvalue: ", pvalue)
-
-        if self.evaluateHypothesis(pvalue):
-            print("Post hoc testing skipped due to not rejected ANOVA H0 hypothesis (u1 = u2 = u3)")
-        else:
-            self.doPostHocTesting(errorTable, extractorLabels)
-        self.doPostHocTesting(errorTable, extractorLabels) # to remove
+        self.printNullHypothesisResults(statistic, pvalue, extractorName)
+        self.evaluate(pvalue, errorTable)
         print("="*40)
 
         return statistic, pvalue
 
 
-    def evaluateHypothesis(self, pvalue):
+    def printNullHypothesisResults(self, statistic, pvalue, extractorName):
+        print("="*40)
+        print(extractorName)
+        print("statistic: ", statistic)
+        print("pvalue: ", pvalue)
+
+
+    def evaluate(self, pvalue, errorTable):
+        if self.evaluateH0Hypothesis(pvalue):
+            print("Post hoc testing skipped due to not rejected ANOVA H0 hypothesis (u1 = u2 = u3)")
+        else:
+            self.doPostHocTesting(errorTable)
+        self.doPostHocTesting(errorTable) # to remove
+
+
+    def evaluateH0Hypothesis(self, pvalue):
         if pvalue < 0.04:
             print("Rejecting H0: no evidence to support hypothesis")
             return False
@@ -44,7 +50,7 @@ class StatiscalAnalysis:
         return False
 
 
-    def doPostHocTesting(self, errorTable, extractorLabels):
+    def doPostHocTesting(self, errorTable):
         print("errorTable: ", errorTable)
         res = sp.posthoc_nemenyi_friedman(errorTable)
         print("res:")
