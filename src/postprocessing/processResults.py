@@ -90,29 +90,23 @@ class ProcessResults:
             classifierName)
 
 
-    def saveTableWithPvalue(self, results, errorTables, extractorsLabels, extractorName):
-        tableToSave = [["feature extraction method"], ["p-value"], ["value of statistic F"]]
-        for name, _ in getFirstItemFromDict(results).items():
-            tableToSave[0].append(name)
+    def saveTableWithPvalue(self, results, errorTables, extractorsLabels, classifierName):
+        tableToSave = [[" ", "values"], ["p-value"], ["value of statistic F"]]
 
-        for extractorName, errorTableForExtractor in zip(extractorsLabels, errorTables):
-            statistic, pvalue = self.statiscal.testNullHypothesis(extractorName,
-                errorTableForExtractor)
-            tableToSave[1].append('{:7e}'.format(pvalue))
-            tableToSave[2].append('{0:.2f}'.format(statistic))
+        statistic, pvalue = self.statiscal.testNullHypothesis(errorTables)
+        tableToSave[1].append('{:7e}'.format(pvalue))
+        tableToSave[2].append('{0:.2f}'.format(statistic))
 
-        self.saveTable.saveTexTable(tableToSave, extractorName+"_pvalues")
+        self.saveTable.saveTexTable(tableToSave, classifierName+"_pvalues")
 
 
     def getErrorTableForAllExtractors(self, results):
-        train_score = self.getDictWith(results, self.completeTestScoreSelector)
-        errorTables = []
+        train_score = self.getDictWith(results, self.avrgTestScoreSelector)
+        errorTables = [[], []]
 
-        for extractorName, scoresForDatabases in train_score.items():
-            toAdd = []
-            for i, databaseTrainScore in zip(range(self.numberOfDatabases), scoresForDatabases):
-                toAdd.append(databaseTrainScore.tolist())
-            errorTables.append(toAdd)
+        for _, scoresForDatabases in train_score.items():
+            for i, extractorTrainScore in zip(range(self.numberOfDatabases), scoresForDatabases):
+                errorTables[i].append(extractorTrainScore)
 
         return errorTables
 
@@ -120,10 +114,10 @@ class ProcessResults:
 
 
 if __name__ == "__main__":
-    arg = {'hands digits:': {'LDA': {'fit_time': np.array([4.84076834, 4.69979095, 4.8373127 , 5.04802823, 4.90385699,
-       4.79904532, 5.28576994, 5.11618185, 5.07327867, 5.03035331]), 'score_time': np.array([0.00514603, 0.00500011, 0.00509238, 0.00497437, 0.00490928,
-       0.00491714, 0.0063436 , 0.004807  , 0.00476003, 0.00519109]), 'test_score': np.array([0.54761905, 0.55238095, 0.57142857, 0.6       , 0.61722488,
-       0.58653846, 0.55882353, 0.58208955, 0.59      , 0.585     ]), 'train_score': np.array([0.97516199, 0.97516199, 0.97840173, 0.97462203, 0.97517539,
+    arg = {'hands digits:': {'LDA': {'fit_time': np.array([4.84076834, 4.69979095, 4.8373127 , 5.04802823, 4.90385699, 4.79904532, 5.28576994, 5.11618185, 5.07327867, 5.03035331]),
+       'score_time': np.array([0.00514603, 0.00500011, 0.00509238, 0.00497437, 0.00490928, 0.00491714, 0.0063436 , 0.004807  , 0.00476003, 0.00519109]),
+       'test_score': np.array([0.54761905, 0.55238095, 0.57142857, 0.6       , 0.61722488, 0.58653846, 0.55882353, 0.58208955, 0.59      , 0.585     ]), 
+       'train_score': np.array([0.97516199, 0.97516199, 0.97840173, 0.97462203, 0.97517539,
        0.9768069 , 0.97631862, 0.97581945, 0.97583244, 0.97690655])}, 'PCA': {'fit_time': np.array([4.95297956, 4.87015963, 5.01747727, 4.94189501, 5.29439402,
        5.00581288, 5.21516919, 5.08671165, 5.05369806, 4.91486049]), 'score_time': np.array([0.01190424, 0.00875854, 0.01200867, 0.01245308, 0.00860095,
        0.00906658, 0.00920987, 0.00853372, 0.00841236, 0.00841546]), 'test_score': np.array([0.34761905, 0.38571429, 0.38095238, 0.4047619 , 0.38755981,

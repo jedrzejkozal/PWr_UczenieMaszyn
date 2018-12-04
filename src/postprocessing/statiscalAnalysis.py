@@ -8,24 +8,25 @@ class StatiscalAnalysis:
         pass
 
 
-    def testNullHypothesis(self, extractorName, errorTable):
+    def testNullHypothesis(self, errorTable):
 
         #please forgive me, stats.f_oneway dosn't accept list of lists or tuple
         a = errorTable[0]
         b = errorTable[1]
-        c = errorTable[0]
+        #c = errorTable[2]
+        c = [0.0, 100.0]
 
         statistic, pvalue = stats.friedmanchisquare(a, b, c)
-        self.printNullHypothesisResults(statistic, pvalue, extractorName)
+        self.printNullHypothesisResults(statistic, pvalue)
         self.evaluate(pvalue, errorTable)
         print("="*40)
 
         return statistic, pvalue
 
 
-    def printNullHypothesisResults(self, statistic, pvalue, extractorName):
+    def printNullHypothesisResults(self, statistic, pvalue):
         print("="*40)
-        print(extractorName)
+        print("Comparison of extractors over multiple datasets result")
         print("statistic: ", statistic)
         print("pvalue: ", pvalue)
 
@@ -52,6 +53,7 @@ class StatiscalAnalysis:
 
     def doPostHocTesting(self, errorTable):
         print("errorTable: ", errorTable)
-        res = sp.posthoc_nemenyi_friedman(errorTable)
+        x = np.array(errorTable)
+        res = sp.posthoc_nemenyi_friedman(x)
         print("res:")
         print(res)
