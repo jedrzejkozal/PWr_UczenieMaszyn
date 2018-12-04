@@ -1,4 +1,5 @@
-from postprocessing.utils import getFirstItemFromDict
+#from postprocessing.utils import getFirstItemFromDict
+from utils import getFirstItemFromDict
 
 class SaveTexTable:
 

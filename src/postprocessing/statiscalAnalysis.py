@@ -1,6 +1,7 @@
 import scipy.stats as stats
 import numpy as np
-from statsmodels.stats.multicomp import pairwise_tukeyhsd
+#from statsmodels.stats.multicomp import pairwise_tukeyhsd
+import scikit_posthocs as sp
 
 class StatiscalAnalysis:
 
@@ -26,6 +27,7 @@ class StatiscalAnalysis:
             print("Post hoc testing skipped due to not rejected ANOVA H0 hypothesis (u1 = u2 = u3)")
         else:
             self.doPostHocTesting(errorTable, extractorLabels)
+        self.doPostHocTesting(errorTable, extractorLabels) # to remove
         print("="*40)
 
         return statistic, pvalue
@@ -44,10 +46,13 @@ class StatiscalAnalysis:
 
 
     def doPostHocTesting(self, errorTable, extractorLabels):
-        data, labels = self.convertErrorTableToSingleVector(errorTable, extractorLabels)
-        print(pairwise_tukeyhsd(data, labels))
+        print("errorTable: ", errorTable)
+        res = sp.posthoc_nemenyi_friedman(errorTable)
+        print("res:")
+        print(res)
 
 
+    """
     def convertErrorTableToSingleVector(self, errorTable, extractorLabels):
         errorTable = np.array(errorTable)
         result = errorTable.flatten()
@@ -61,3 +66,4 @@ class StatiscalAnalysis:
         labels = np.array(labels)
 
         return result, labels
+    """
