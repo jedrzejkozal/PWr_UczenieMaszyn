@@ -22,7 +22,8 @@ dataBaseDict = {
     #'muct': Db("muct", 276), # loads normaly
     #'specs-on-faces': Db("specs-on-faces", 101), # loads normaly
     #'stirling': Db("stirling", 36), # loads normaly, but getting error: ValueError: n_splits=10 cannot be greater than the number of members in each class.
-    'umist': Db("umist", 20),
+    #'umist': Db("umist", 20), # loads normaly
+    'vidtimit': Db("vidtimit", 14), # loads normaly
 }
 
 if __name__ == "__main__":
