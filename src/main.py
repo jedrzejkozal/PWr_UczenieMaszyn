@@ -19,7 +19,8 @@ dataBaseDict = {
     #'georgia': Db("georgia", 50), #loads normaly
     #'jaffe': Db("jaffe", 10),
     #'mit': Db("mit-cbcl", 29),
-    'muct': Db("muct", 275),
+    #'muct': Db("muct", 276),
+    'specs-on-faces': Db("specs-on-faces", 101)
 }
 
 if __name__ == "__main__":

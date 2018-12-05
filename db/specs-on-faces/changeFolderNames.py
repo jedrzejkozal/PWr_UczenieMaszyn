@@ -1,8 +1,8 @@
 import os
 
-start = 467
-end = 477
-move = 202
+start = 74
+end = 102
+move = 1
 
 for i in range(start, end+1):
     old_name = str(i)
