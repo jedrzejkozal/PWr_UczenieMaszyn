@@ -13,9 +13,9 @@ classifiersDict = {
 
 dataBaseDict = {
     'att:': Db("att", 40), #loads normaly
-    #'caltec:': Db("croped_caltec", 19), # loads normaly
+    'caltec:': Db("croped_caltec", 19), # loads normaly
     #'essex:': Db("essex", 392), # loads normaly, note: on my 8Gb RAM essex causes MemoryError
-    #'georgia': Db("georgia", 50), #loads normaly
+    'georgia': Db("georgia", 50), #loads normaly
     #'jaffe': Db("jaffe", 10), # loads normaly
     #'mit': Db("mit-cbcl", 29), # loads normaly
     #'muct': Db("muct", 276), # loads normaly
