@@ -17,10 +17,11 @@ dataBaseDict = {
     #'caltec:': Db("croped_caltec", 19), # loads normaly
     #'essex:': Db("essex", 392), # loads normaly, note: on my 8Gb RAM essex causes MemoryError
     #'georgia': Db("georgia", 50), #loads normaly
-    #'jaffe': Db("jaffe", 10),
-    #'mit': Db("mit-cbcl", 29),
-    #'muct': Db("muct", 276),
-    'specs-on-faces': Db("specs-on-faces", 101)
+    #'jaffe': Db("jaffe", 10), # loads normaly
+    #'mit': Db("mit-cbcl", 29), # loads normaly
+    #'muct': Db("muct", 276), # loads normaly
+    #'specs-on-faces': Db("specs-on-faces", 101), # loads normaly
+    'stirling': Db("stirling", 36), # loads normaly, but getting error: ValueError: n_splits=10 cannot be greater than the number of members in each class.
 }
 
 if __name__ == "__main__":
