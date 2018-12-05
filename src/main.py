@@ -12,8 +12,7 @@ classifiersDict = {
 }
 
 dataBaseDict = {
-    #'att:': Db("att", 40), #loads normaly
-    #'hands digits:': Db("hands", 10), # loads normaly
+    'att:': Db("att", 40), #loads normaly
     #'caltec:': Db("croped_caltec", 19), # loads normaly
     #'essex:': Db("essex", 392), # loads normaly, note: on my 8Gb RAM essex causes MemoryError
     #'georgia': Db("georgia", 50), #loads normaly
@@ -24,7 +23,7 @@ dataBaseDict = {
     #'stirling': Db("stirling", 36), # loads normaly, but getting error: ValueError: n_splits=10 cannot be greater than the number of members in each class.
     #'umist': Db("umist", 20), # loads normaly
     #'vidtimit': Db("vidtimit", 14), # loads normaly
-    'yale': Db("yale", 15), # loads normaly
+    #'yale': Db("yale", 15), # loads normaly
 }
 
 if __name__ == "__main__":

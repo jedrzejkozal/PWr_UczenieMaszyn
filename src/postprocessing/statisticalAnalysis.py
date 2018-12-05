@@ -2,13 +2,13 @@ import scipy.stats as stats
 import numpy as np
 import scikit_posthocs as sp
 
-class StatiscalAnalysis:
+class StatisticalAnalysis:
 
     def __init__(self):
         pass
 
 
-    def testNullHypothesis(self, errorTable):
+    def testHypothesis(self, errorTable):
 
         #please forgive me, stats.f_oneway dosn't accept list of lists or tuple
         a = errorTable[0]
@@ -17,10 +17,10 @@ class StatiscalAnalysis:
 
         statistic, pvalue = stats.friedmanchisquare(a, b, c)
         self.printNullHypothesisResults(statistic, pvalue)
-        self.evaluate(pvalue, errorTable)
+        posthoc = self.evaluate(pvalue, errorTable)
         print("="*40)
 
-        return statistic, pvalue
+        return statistic, pvalue, posthoc
 
 
     def printNullHypothesisResults(self, statistic, pvalue):
@@ -33,9 +33,8 @@ class StatiscalAnalysis:
     def evaluate(self, pvalue, errorTable):
         if self.evaluateH0Hypothesis(pvalue):
             print("Post hoc testing skipped due to not rejected ANOVA H0 hypothesis (u1 = u2 = u3)")
-        else:
-            self.doPostHocTesting(errorTable)
-        self.doPostHocTesting(errorTable) # to remove
+
+        return self.doPostHocTesting(errorTable)
 
 
     def evaluateH0Hypothesis(self, pvalue):
@@ -56,3 +55,4 @@ class StatiscalAnalysis:
         res = sp.posthoc_nemenyi_friedman(x)
         print("res:")
         print(res)
+        return res

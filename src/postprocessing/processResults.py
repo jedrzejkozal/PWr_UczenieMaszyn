@@ -1,10 +1,10 @@
 from postprocessing.saveTexTable import SaveTexTable
 from postprocessing.savePlot import SavePlot
-from postprocessing.statiscalAnalysis import StatiscalAnalysis
+from postprocessing.statisticalAnalysis import StatisticalAnalysis
 from postprocessing.utils import getFirstItemFromDict
 #from saveTexTable import SaveTexTable
 #from savePlot import SavePlot
-#from statiscalAnalysis import StatiscalAnalysis
+#from statisticalAnalysis import StatisticalAnalysis
 #from utils import getFirstItemFromDict
 
 import numpy as np
@@ -14,7 +14,7 @@ class ProcessResults:
     def __init__(self):
         self.saveTable = SaveTexTable()
         self.savePlot = SavePlot()
-        self.statiscal = StatiscalAnalysis()
+        self.statistical = StatisticalAnalysis()
 
 
     def process(self, results, classifierName):
@@ -88,18 +88,26 @@ class ProcessResults:
         errorTables = self.getErrorTableForAllExtractors(results)
         extractorsLabels = self.getExtractorsLabels(results)
 
-        self.saveTableWithPvalue(results, errorTables, extractorsLabels,
-            classifierName)
+        statistic, pvalue, posthoc = self.statistical.testHypothesis(errorTables)
+
+        self.saveTableWithPvalue(statistic, pvalue, classifierName+"_pvalues")
+        self.savePostHocResults(posthoc, classifierName+"_postHoc")
 
 
-    def saveTableWithPvalue(self, results, errorTables, extractorsLabels, classifierName):
+    def saveTableWithPvalue(self, statistic, pvalue, fileName):
         tableToSave = [[" ", "values"], ["p-value"], ["value of statistic F"]]
 
-        statistic, pvalue = self.statiscal.testNullHypothesis(errorTables)
         tableToSave[1].append('{:7e}'.format(pvalue))
         tableToSave[2].append('{0:.2f}'.format(statistic))
 
-        self.saveTable.saveTexTable(tableToSave, classifierName+"_pvalues")
+        self.saveTable.saveTexTable(tableToSave, fileName)
+
+
+    def savePostHocResults(self, postHoc, fileName):
+        path = "../doc/tables/" + fileName + ".txt"
+        f = open(path, 'w')
+        f.write(str(postHoc))
+        f.close()
 
 
     def getErrorTableForAllExtractors(self, results):
