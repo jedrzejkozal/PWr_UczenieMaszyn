@@ -16,7 +16,8 @@ dataBaseDict = {
     #'hands digits:': Db("hands", 10), # loads normaly
     #'caltec:': Db("croped_caltec", 19), # loads normaly
     #'essex:': Db("essex", 392), # loads normaly, note: on my 8Gb RAM essex causes MemoryError
-    'georgia': Db("georgia", 50), #loads normaly
+    #'georgia': Db("georgia", 50), #loads normaly
+    'jaffe': Db("jaffe", 9),
 }
 
 if __name__ == "__main__":
