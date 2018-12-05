@@ -32,6 +32,8 @@ class Db:
 
                 img = cv2.imread(filePath)
                 print("filePath: ", filePath)
+                if filePath[-9:] == ".DS_Store":
+                    continue
                 imgGray = basicProcessing.convertToGrayscale(img)
 
                 if imgGray.shape != (100, 100): #IMG_5935.JPG, IMG_5874.JPG, IMG_5978.JPG
