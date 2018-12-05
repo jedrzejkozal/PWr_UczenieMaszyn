@@ -21,7 +21,8 @@ dataBaseDict = {
     #'mit': Db("mit-cbcl", 29), # loads normaly
     #'muct': Db("muct", 276), # loads normaly
     #'specs-on-faces': Db("specs-on-faces", 101), # loads normaly
-    'stirling': Db("stirling", 36), # loads normaly, but getting error: ValueError: n_splits=10 cannot be greater than the number of members in each class.
+    #'stirling': Db("stirling", 36), # loads normaly, but getting error: ValueError: n_splits=10 cannot be greater than the number of members in each class.
+    'umist': Db("umist", 20),
 }
 
 if __name__ == "__main__":
