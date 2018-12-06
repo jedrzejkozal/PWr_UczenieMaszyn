@@ -38,6 +38,7 @@ class ProcessResults:
         self.saveTable.saveTable(results, self.fitTimeSelector, classifierName+"_fit_time_table")
 
         self.doStatisticalAnalysis(results, classifierName)
+        self.saveResults(results, classifierName+"_results")
 
 
     def avrgTestScoreSelector(self, scores):
@@ -91,7 +92,7 @@ class ProcessResults:
         statistic, pvalue, posthoc = self.statistical.testHypothesis(errorTables)
 
         self.saveTableWithPvalue(statistic, pvalue, classifierName+"_pvalues")
-        self.savePostHocResults(posthoc, classifierName+"_postHoc")
+        self.saveResults(posthoc, classifierName+"_postHoc")
 
 
     def saveTableWithPvalue(self, statistic, pvalue, fileName):
@@ -103,10 +104,10 @@ class ProcessResults:
         self.saveTable.saveTexTable(tableToSave, fileName)
 
 
-    def savePostHocResults(self, postHoc, fileName):
+    def saveResults(self, results, fileName):
         path = "../doc/tables/" + fileName + ".txt"
         f = open(path, 'w')
-        f.write(str(postHoc))
+        f.write(str(results))
         f.close()
 
 

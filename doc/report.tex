@@ -141,6 +141,7 @@ $S_{W}$ is defined as:
 
 \begin{equation}
     S_{W} = \sum_{i} A_{i}A_{i}^T
+    \label{eq:SW}
 \end{equation}
 
 where $A_i$ is matrix of all samples $X_i$ from class $i$ reduced by $\mu_i$. $S_W$ is used to describe distance between samples of the chosen class and its mean after projection:
@@ -252,7 +253,7 @@ Analysis of results was performed using Friedman test with Nemenyi post-hoc test
 
 \begin{table*}
     \centering
-    \caption{Comparison of p-values and F-values for ANOVA test for Svc classifier}
+    \caption{Comparison of p-values and F-values for Friedman test for Svc classifier}
     \input{tables/Svm_pvalues.tex}
     \label{table:svm_pvalues}
 \end{table*}
@@ -270,6 +271,9 @@ Analysis of results was performed using Friedman test with Nemenyi post-hoc test
     \input{tables/Svm_fit_time_table.tex}
     \label{table:svm_fit_time_comparison}
 \end{table}
+
+During testing some problems occured. For some dataset with large number of images Python virtual machine run out of memory on machine with 8 Gb RAM. This happend during computing eigenvalues and eigenvectors of $S_W$ matrix (when establishing within variance) while performing LDA for vidtimit dataset. $A_i$ (see equation \ref{eq:SW}) contains only images for $i$-th class. Maximal number of images for one class in vidtimit is 2644. Images are stored using 8 bit uint type. All images are converted to greyscale, so there is one 8 bit unsigned int per pixel. Sckit-learn use SVD implementation from numpy to establish eigenvalues and eigenvectors of $S_W$. In theory memory needed for storage of SVDs decomposition matrixes given all previous asumptions is aproximatly 0.25 Gb, which should not be problem. Numpy utilises Lapack library for SVD computation. Lapack is linear algebra library written in Fortran. There is little known about alorithms used to perform SVD in Lapack, therefore reason of raising MemoryError cannot be established.
+How the problem was solved? T.B.C.
 
 \section{Conclusions}
 
