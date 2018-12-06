@@ -12,8 +12,8 @@ classifiersDict = {
 }
 
 dataBaseDict = {
-    #'essex:': Db("essex", 392), # loads normaly, note: on my 8Gb RAM essex causes MemoryError
-    #'vidtimit': Db("vidtimit", 14), # loads normaly, process gets killed, no stacktrace, only "Killed" apears in console, probably due to SIGKILL
+    'essex:': Db("essex", 392), # loads normaly, note: on my 8Gb RAM essex causes MemoryError
+    'vidtimit': Db("vidtimit", 14), # loads normaly, process gets killed, no stacktrace, only "Killed" apears in console, probably due to SIGKILL
     #'att:': Db("att", 40), #loads normaly, results checked
     #'caltec:': Db("croped_caltec", 19), # loads normaly, results checked
     #'georgia': Db("georgia", 50), #loads normaly, results checked
@@ -23,7 +23,7 @@ dataBaseDict = {
     #'specs-on-faces': Db("specs-on-faces", 101), # loads normaly, results checked
     #'stirling': Db("stirling", 36), # loads normaly, but getting error: ValueError: n_splits=10 cannot be greater than the number of members in each class.
     #'umist': Db("umist", 20), # loads normaly, results checked
-    'yale': Db("yale", 15), # loads normaly, results checked
+    #'yale': Db("yale", 15), # loads normaly, results checked
 }
 
 if __name__ == "__main__":
