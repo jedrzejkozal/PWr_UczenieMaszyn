@@ -2,10 +2,12 @@ from postprocessing.saveTexTable import SaveTexTable
 from postprocessing.savePlot import SavePlot
 from postprocessing.statisticalAnalysis import StatisticalAnalysis
 from postprocessing.utils import getFirstItemFromDict
+from postprocessing.utils import saveResults
 #from saveTexTable import SaveTexTable
 #from savePlot import SavePlot
 #from statisticalAnalysis import StatisticalAnalysis
 #from utils import getFirstItemFromDict
+#from utils import saveResults
 
 import numpy as np
 
@@ -18,10 +20,10 @@ class ProcessResults:
 
 
     def process(self, results, classifierName):
-        labels = self.getDatabasesLabels(results)
-
         print("results: ", results)
+        saveResults(results, classifierName+"_results")
 
+        labels = self.getDatabasesLabels(results)
         extractorsResult = self.getDictWith(results, self.avrgTestScoreSelector)
         self.savePlot.saveBarPlot(extractorsResult, classifierName+"_accuracy_comparison",
             labels, ylabel='Accuracy')
@@ -38,7 +40,6 @@ class ProcessResults:
         self.saveTable.saveTable(results, self.fitTimeSelector, classifierName+"_fit_time_table")
 
         self.doStatisticalAnalysis(results, classifierName)
-        self.saveResults(results, classifierName+"_results")
 
 
     def avrgTestScoreSelector(self, scores):
@@ -92,7 +93,7 @@ class ProcessResults:
         statistic, pvalue, posthoc = self.statistical.testHypothesis(errorTables)
 
         self.saveTableWithPvalue(statistic, pvalue, classifierName+"_pvalues")
-        self.saveResults(posthoc, classifierName+"_postHoc")
+        saveResults(posthoc, classifierName+"_postHoc")
 
 
     def saveTableWithPvalue(self, statistic, pvalue, fileName):
@@ -102,13 +103,6 @@ class ProcessResults:
         tableToSave[2].append('{0:.2f}'.format(statistic))
 
         self.saveTable.saveTexTable(tableToSave, fileName)
-
-
-    def saveResults(self, results, fileName):
-        path = "../doc/tables/" + fileName + ".txt"
-        f = open(path, 'w')
-        f.write(str(results))
-        f.close()
 
 
     def getErrorTableForAllExtractors(self, results):

@@ -1,6 +1,7 @@
 from Db import Db
 from extractorsComp import ExtractorComparison
 from postprocessing.processResults import ProcessResults
+from postprocessing.utils import saveResults
 
 from sklearn import svm
 from sklearn.neural_network import MLPClassifier
@@ -12,8 +13,9 @@ classifiersDict = {
 }
 
 dataBaseDict = {
-    'essex:': Db("essex", 392), # loads normaly, note: on my 8Gb RAM essex causes MemoryError
-    'vidtimit': Db("vidtimit", 14), # loads normaly, process gets killed, no stacktrace, only "Killed" apears in console, probably due to SIGKILL
+    'yale': Db("yale", 15), # loads normaly, results checked
+    #'essex:': Db("essex", 392), # loads normaly, note: on my 8Gb RAM essex causes MemoryError
+    #'vidtimit': Db("vidtimit", 14), # loads normaly, process gets killed, no stacktrace, only "Killed" apears in console, probably due to SIGKILL
     #'att:': Db("att", 40), #loads normaly, results checked
     #'caltec:': Db("croped_caltec", 19), # loads normaly, results checked
     #'georgia': Db("georgia", 50), #loads normaly, results checked
@@ -23,7 +25,6 @@ dataBaseDict = {
     #'specs-on-faces': Db("specs-on-faces", 101), # loads normaly, results checked
     #'stirling': Db("stirling", 36), # loads normaly, but getting error: ValueError: n_splits=10 cannot be greater than the number of members in each class.
     #'umist': Db("umist", 20), # loads normaly, results checked
-    #'yale': Db("yale", 15), # loads normaly, results checked
 }
 
 if __name__ == "__main__":
@@ -51,5 +52,7 @@ if __name__ == "__main__":
             result = extractorComparision.compareExtractors(classifier, x, y,
                 db.numClasses)
             results[dbName] = result
+
+            saveResults(result, "partialResults/"+classifierName+"_"+dbName+"_results")
 
         processResults.process(results, classifierName)
