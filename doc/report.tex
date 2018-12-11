@@ -239,10 +239,12 @@ Analysis of results was performed using Friedman test with Nemenyi post-hoc test
 
 Tests were performed separately for SVC and MLP classifiers for all FE methods. Obtained accuracy and training time were presented in below tables and plots.
 
-\subsection{Results for SVC}
-
 %During testing some problems occured. For some dataset with large number of images Python virtual machine run out of memory on machine with 8 Gb RAM. This happend during computing eigenvalues and eigenvectors of $S_W$ matrix (when establishing within variance) while performing LDA for vidtimit dataset. $A_i$ (see equation \ref{eq:SW}) contains only images for $i$-th class. Maximal number of images for one class in vidtimit is 2644. Images are stored using 8 bit uint type. All images are converted to greyscale, so there is one 8 bit unsigned int per pixel. Sckit-learn use SVD implementation from numpy to establish eigenvalues and eigenvectors of $S_W$. In theory memory needed for storage of SVDs decomposition matrixes given all previous asumptions is aproximatly 0.25 Gb, which should not be problem. Numpy utilises Lapack library for SVD computation. Lapack is linear algebra library written in Fortran. There is little known about alorithms used to perform SVD in Lapack, therefore reason of raising MemoryError cannot be established.
 %How the problem was solved? T.B.C.
+
+
+\subsection{Results for SVC}
+
 
 \begin{table}[!h]
     \centering
@@ -267,19 +269,19 @@ Tests were performed separately for SVC and MLP classifiers for all FE methods. 
 
 \begin{table}[!h]
     \centering
-    \caption{Pvalues of Neymani posthoc tests.}
+    \caption{Pvalues of Neymani posthoc tests .}
     \begin{tabular}{|c|c|c|c|}
          \hline
           & CNN & LDA & PCA \\
          \hline
-         CNN & -1.000 &  0.128 &  0.003 \\
+         CNN &  - &  0.128 &  0.003 \\
          \hline
-         LDA &  0.128 & -1.000 &  0.381 \\
+         LDA &  - & - &  0.381 \\
          \hline
-         PCA &  0.003 &  0.381 & -1.000 \\
+         PCA &  - & - & - \\
          \hline
     \end{tabular}
-    \label{tab:posthoc_pvalues}
+    \label{tab:svm_posthoc_pvalues}
 \end{table}
 
 \begin{figure*}[!h]
@@ -296,7 +298,66 @@ Tests were performed separately for SVC and MLP classifiers for all FE methods. 
     \label{fig:svm_fit_time_comparision}
 \end{figure*}
 
-According to obtained results, null hypothesis of Friedmann test was rejected with $\alpha = 0.05$ (see Table \ref{table:svm_pvalues}). Results of post-hoc Nemenyi tests for FE methods similarity were shown in Table \ref{tab:posthoc_pvalues}.  
+According to obtained results, null hypothesis of Friedmann test was rejected with $\alpha = 0.05$ (see Table \ref{table:svm_pvalues}). Results of post-hoc Nemenyi tests for FE methods similarity were shown in Table \ref{tab:svm_posthoc_pvalues}. Ranks obtained in post hoc tests were 2.625 2.125 1.25.
+
+
+\subsection{Results for MLP}
+
+
+\begin{table}[!h]
+    \centering
+    \caption{Comparison of avrage accuracy of MLP classifier for chosen FE methods and datasets}
+    \input{tables/NN_acc_table.tex}
+    \label{table:NN_acc_comparison}
+\end{table}
+
+\begin{table}[!h]
+    \centering
+    \caption{Comparison of avrage time of traning MLP classifier for chosen FE methods and datasets}
+    \input{tables/NN_fit_time_table.tex}
+    \label{table:NN_fit_time_comparison}
+\end{table}
+
+\begin{table}[!h]
+    \centering
+    \caption{Comparison of p-values and F-values for Friedman test for MLP classifier}
+    \input{tables/NN_pvalues.tex}
+    \label{table:NN_pvalues}
+\end{table}
+
+\begin{table}[!h]
+    \centering
+    \caption{Pvalues of Neymani posthoc tests for MLP classifier.}
+    \begin{tabular}{|c|c|c|c|}
+         \hline
+          & CNN & LDA & PCA \\
+         \hline
+         CNN &  - &  0.438 &  0.002 \\
+         \hline
+         LDA &  - & - &  0.081 \\
+         \hline
+         PCA &  - & - & - \\
+         \hline
+    \end{tabular}
+    \label{tab:NN_posthoc_pvalues}
+\end{table}
+
+\begin{figure*}[!h]
+    \centering
+    \includegraphics[scale=0.875]{images/NN_accuracy_comparison.png}
+    \caption{Comparison of avrage accuracy of MLP classifier for chosen FE methods and datasets}
+    \label{fig:NN_acc_comparision}
+\end{figure*}
+
+\begin{figure*}[!h]
+    \centering
+    \includegraphics[scale=0.875]{images/NN_fit_time_comparison.png}
+    \caption{Comparison of avrage time of traning MLP classifier for chosen FE methods and datasets}
+    \label{fig:svm_fit_time_comparision}
+\end{figure*}
+
+Ranks obtained with post hoc tests: 2.625 2.125 1.25.
+
 
 \section{Conclusions}
 

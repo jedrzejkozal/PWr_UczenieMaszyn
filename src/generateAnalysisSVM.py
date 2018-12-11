@@ -136,4 +136,4 @@ arg = {'yale': {'CNN': {'fit_time': np.array([6.60217834, 4.30138469, 4.37166619
 
 
 p = ProcessResults()
-p.process(arg, "SVM")
+p.process(arg, "Svm")

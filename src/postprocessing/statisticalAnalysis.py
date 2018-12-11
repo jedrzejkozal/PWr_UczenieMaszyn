@@ -2,6 +2,9 @@ import scipy.stats as stats
 import numpy as np
 import scikit_posthocs as sp
 
+from postprocessing.test import NemenyiTestPostHoc
+from scipy.stats import friedmanchisquare, rankdata, norm
+
 class StatisticalAnalysis:
 
     def __init__(self):
@@ -50,9 +53,24 @@ class StatisticalAnalysis:
 
 
     def doPostHocTesting(self, errorTable):
-        x = np.array(errorTable)
-        x = np.transpose(x[:, 0, :])
-        res = sp.posthoc_nemenyi_friedman(x)
-        print("res:")
-        print(res)
-        return res
+        print('\n\n')
+        #print("errorTable: ", errorTable)
+        #print("errorTable[0]: ", errorTable[0])
+        #print("errorTable[0][0]: ", errorTable[0][0])
+
+        x = np.asarray([tuple(errorTable[0][0]), tuple(errorTable[1][0]),
+            tuple(errorTable[2][0])])
+        #x = np.transpose(x[:, 0, :])
+        #res = sp.posthoc_nemenyi(x)
+        #print("x: ", x)
+        #print("x[0]: ", x[0])
+
+        print("friedmanchisquare: ", friedmanchisquare(x[0], x[1], x[2]))
+        nemenyi = NemenyiTestPostHoc(x)
+        meanRanks, pValues = nemenyi.do()
+        print("meanRanks: ", meanRanks)
+        print("pValues: \n", pValues)
+
+        #print("res:")
+        #print(res)
+        return str(pValues)
