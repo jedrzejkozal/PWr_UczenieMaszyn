@@ -14,10 +14,10 @@ classifiersDict = {
 
 dataBaseDict = {
     'yale': Db("yale", 15), # loads normaly, results checked
-    #'essex:': Db("essex", 392), # loads normaly, note: on my 8Gb RAM essex causes MemoryError
+    #'essex': Db("essex", 392), # loads normaly, note: on my 8Gb RAM essex causes MemoryError
     #'vidtimit': Db("vidtimit", 14), # loads normaly, process gets killed, no stacktrace, only "Killed" apears in console, probably due to SIGKILL
-    #'att:': Db("att", 40), #loads normaly, results checked
-    #'caltec:': Db("croped_caltec", 19), # loads normaly, results checked
+    #'att': Db("att", 40), #loads normaly, results checked
+    #'caltec': Db("croped_caltec", 19), # loads normaly, results checked
     #'georgia': Db("georgia", 50), #loads normaly, results checked
     #'jaffe': Db("jaffe", 10), # loads normaly, results checked
     #'mit': Db("mit-cbcl", 29), # loads normaly, results checked

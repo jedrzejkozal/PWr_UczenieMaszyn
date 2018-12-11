@@ -217,7 +217,7 @@ According to \cite{Goodfellow-et-al-2016}, convolution operation is used in the 
          \hline
          AT\&T Database & 400 & 10 & \cite{TheDatabaseOfFaces} \\
          \hline
-         MIT-CBCL  & 2000 & 200 & \cite{FaceRecognitionDatabase} \\
+         MIT-CBCL  & 2000 & >100 & \cite{FaceRecognitionDatabase} \\
          \hline
          Essex Collection & 7900 & 20 & \cite{essex} \\
           \hline
@@ -237,43 +237,66 @@ Analysis of results was performed using Friedman test with Nemenyi post-hoc test
 
 \section{Results}
 
-\begin{figure*}
-    \centering
-    \includegraphics[scale=0.8]{images/Svm_accuracy_comparison.png}
-    \caption{Comparison of avrage accuracy of Svc classifier for chosen FE methods and datasets}
-    \label{fig:svm_acc_comparision}
-\end{figure*}
+Tests were performed separately for SVC and MLP classifiers for all FE methods. Obtained accuracy and training time were presented in below tables and plots.
 
-\begin{figure*}
-    \centering
-    \includegraphics[scale=0.8]{images/Svm_fit_time_comparison.png}
-    \caption{Comparison of avrage time of traning Svc classifier for chosen FE methods and datasets}
-    \label{fig:svm_fit_time_comparision}
-\end{figure*}
+\subsection{Results for SVC}
 
-\begin{table*}
-    \centering
-    \caption{Comparison of p-values and F-values for Friedman test for Svc classifier}
-    \input{tables/Svm_pvalues.tex}
-    \label{table:svm_pvalues}
-\end{table*}
+%During testing some problems occured. For some dataset with large number of images Python virtual machine run out of memory on machine with 8 Gb RAM. This happend during computing eigenvalues and eigenvectors of $S_W$ matrix (when establishing within variance) while performing LDA for vidtimit dataset. $A_i$ (see equation \ref{eq:SW}) contains only images for $i$-th class. Maximal number of images for one class in vidtimit is 2644. Images are stored using 8 bit uint type. All images are converted to greyscale, so there is one 8 bit unsigned int per pixel. Sckit-learn use SVD implementation from numpy to establish eigenvalues and eigenvectors of $S_W$. In theory memory needed for storage of SVDs decomposition matrixes given all previous asumptions is aproximatly 0.25 Gb, which should not be problem. Numpy utilises Lapack library for SVD computation. Lapack is linear algebra library written in Fortran. There is little known about alorithms used to perform SVD in Lapack, therefore reason of raising MemoryError cannot be established.
+%How the problem was solved? T.B.C.
 
-\begin{table}[t]
+\begin{table}[!h]
     \centering
     \caption{Comparison of avrage accuracy of Svc classifier for chosen FE methods and datasets}
     \input{tables/Svm_acc_table.tex}
     \label{table:svm_acc_comparison}
 \end{table}
 
-\begin{table}
+\begin{table}[!h]
     \centering
     \caption{Comparison of avrage time of traning Svc classifier for chosen FE methods and datasets}
     \input{tables/Svm_fit_time_table.tex}
     \label{table:svm_fit_time_comparison}
 \end{table}
 
-During testing some problems occured. For some dataset with large number of images Python virtual machine run out of memory on machine with 8 Gb RAM. This happend during computing eigenvalues and eigenvectors of $S_W$ matrix (when establishing within variance) while performing LDA for vidtimit dataset. $A_i$ (see equation \ref{eq:SW}) contains only images for $i$-th class. Maximal number of images for one class in vidtimit is 2644. Images are stored using 8 bit uint type. All images are converted to greyscale, so there is one 8 bit unsigned int per pixel. Sckit-learn use SVD implementation from numpy to establish eigenvalues and eigenvectors of $S_W$. In theory memory needed for storage of SVDs decomposition matrixes given all previous asumptions is aproximatly 0.25 Gb, which should not be problem. Numpy utilises Lapack library for SVD computation. Lapack is linear algebra library written in Fortran. There is little known about alorithms used to perform SVD in Lapack, therefore reason of raising MemoryError cannot be established.
-How the problem was solved? T.B.C.
+\begin{table}[!h]
+    \centering
+    \caption{Comparison of p-values and F-values for Friedman test for Svc classifier}
+    \input{tables/Svm_pvalues.tex}
+    \label{table:svm_pvalues}
+\end{table}
+
+\begin{table}[!h]
+    \centering
+    \caption{Pvalues of Neymani posthoc tests.}
+    \begin{tabular}{|c|c|c|c|}
+         \hline
+          & CNN & LDA & PCA \\
+         \hline
+         CNN & -1.000 &  0.128 &  0.003 \\
+         \hline
+         LDA &  0.128 & -1.000 &  0.381 \\
+         \hline
+         PCA &  0.003 &  0.381 & -1.000 \\
+         \hline
+    \end{tabular}
+    \label{tab:posthoc_pvalues}
+\end{table}
+
+\begin{figure*}[!h]
+    \centering
+    \includegraphics[scale=0.875]{images/Svm_accuracy_comparison.png}
+    \caption{Comparison of avrage accuracy of Svc classifier for chosen FE methods and datasets}
+    \label{fig:svm_acc_comparision}
+\end{figure*}
+
+\begin{figure*}[!h]
+    \centering
+    \includegraphics[scale=0.875]{images/Svm_fit_time_comparison.png}
+    \caption{Comparison of avrage time of traning Svc classifier for chosen FE methods and datasets}
+    \label{fig:svm_fit_time_comparision}
+\end{figure*}
+
+According to obtained results, null hypothesis of Friedmann test was rejected with $\alpha = 0.05$ (see Table \ref{table:svm_pvalues}). Results of post-hoc Nemenyi tests for FE methods similarity were shown in Table \ref{tab:posthoc_pvalues}.  
 
 \section{Conclusions}
 

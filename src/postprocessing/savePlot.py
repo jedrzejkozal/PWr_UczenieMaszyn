@@ -38,6 +38,9 @@ class SavePlot:
         if setLogScale:
             plt.yscale("log")
 
+        #plt.xticks(rotation='vertical')
+        plt.xticks(rotation=40)
+
         fullPath = '../doc/images/' + fileName + '.png'
         fig.savefig(fullPath)
 
