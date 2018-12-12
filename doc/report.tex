@@ -395,9 +395,9 @@ Very low p-value was reported for LDA and PCA, and this is in line with obtained
 
 \section{Conclusions}
 
-Experiments were carried out with established methodology. Results were collected and analysed. Some flaws in chosen methodology were pointed out and taken into consideration during the analysis of results.
+Experiments were carried out with established methodology. Results were collected and analysed. For both SVC and MLP classifiers performance obtained by CNN was better than performance of PCA and LDA. No statistical difference was noted between LDA and PCA. Besides that, PCA in usage with SVC had some problems with few databases, especially with datasets containing different face orientations (f.e.. att, georgia, muct or stirling). Some flaws in chosen methodology were pointed out and taken into consideration during the analysis of results.
 
-For both SVC and MLP classifiers performance obtained by CNN was better then performance of PCA and LDA. No statistical difference was noted between LDA and PCA. Besides that, PCA in usage with SVC had some problems with few databases, especially with datasets containing different face orientations (f.e.. att, georgia, muct or stirling).
+10-fold cross validation was a good choice for performing validation on multiple datasets that resulted in well calculated performance of implemented models. Using a scikit-learn cross validation allowed to save time by not writing custom implementations.
 
 Time of the training was reported in this article, but only for illustrative purposes. No statistical analysis of training time was performed.
 
