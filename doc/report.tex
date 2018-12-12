@@ -241,8 +241,7 @@ Tests were performed separately for SVC and MLP classifiers for all FE methods. 
 
 Nemenyi test ranks perfomernce of algithms for each dataset, then calculates mean of ranks for algorithms. Means are tested using Tukey test (to be more precise: diffrence of means are compared to standard error), to check if there is singnificant diffrence in performance over multiple datasets. In case of 3 datasets there are only 3 ranks, that can be obtained. Each rank for chosen algorithm and dataset can take value 1, 2 or 3, therefore diffrence between mean ranks will not obtain large value (in fact maximal diffrence between mean ranks is 2). Significant diffrence will be noted by Neymani test between two algrithms achiving mostly ranks 1 or 3. This is clear limitation of post hoc analysis in this case. Suppose we got two algorithms with good performence (algorithms A and B) and one algrithm with poor performance (algorithm C). Algorithm A is slightly beeter then algorithm B, therefore obtains more frequently rank 3. In this case due to comparing only avrage ranks sigginifcant diffrence between algorithm A and C will be reported, and no significant diffrence will be reported for algorithms B and C. This was taken into consideration in further analysis of results.
 
-%During testing some problems occured. For some dataset with large number of images Python virtual machine run out of memory on machine with 8 Gb RAM. This happend during computing eigenvalues and eigenvectors of $S_W$ matrix (when establishing within variance) while performing LDA for vidtimit dataset. $A_i$ (see equation \ref{eq:SW}) contains only images for $i$-th class. Maximal number of images for one class in vidtimit is 2644. Images are stored using 8 bit uint type. All images are converted to greyscale, so there is one 8 bit unsigned int per pixel. Sckit-learn use SVD implementation from numpy to establish eigenvalues and eigenvectors of $S_W$. In theory memory needed for storage of SVDs decomposition matrixes given all previous asumptions is aproximatly 0.25 Gb, which should not be problem. Numpy utilises Lapack library for SVD computation. Lapack is linear algebra library written in Fortran. There is little known about alorithms used to perform SVD in Lapack, therefore reason of raising MemoryError cannot be established.
-%How the problem was solved? T.B.C.
+Also important issue with Stirling faces database was found. With aprroximate 9 images per class 10 fold Stratified Cross Validation cannot be performed. $N$ fold Stratified Cross Validation requiers at least $N$ images for each class. To overcome this problem oversampling of Stirling database was introduced.
 
 
 \subsection{Results for SVC}
@@ -271,7 +270,7 @@ Nemenyi test ranks perfomernce of algithms for each dataset, then calculates mea
 
 \begin{table}[!h]
     \centering
-    \caption{Pvalues of Neymani posthoc tests .}
+    \caption{Pvalues of Neymani posthoc tests for Svc classifier.}
     \begin{tabular}{|c|c|c|c|}
          \hline
           & CNN & LDA & PCA \\
@@ -300,8 +299,11 @@ Nemenyi test ranks perfomernce of algithms for each dataset, then calculates mea
     \label{fig:svm_fit_time_comparision}
 \end{figure*}
 
-According to obtained results, null hypothesis of Friedmann test was rejected with $\alpha = 0.05$ (see Table \ref{table:svm_pvalues}). 
-Results of post-hoc Nemenyi tests for FE methods similarity were shown in Table \ref{tab:svm_posthoc_pvalues}. Ranks obtained in post hoc testing for CNN, LDA and PCA were correspondingly 2.625, 2.125 and 1.25. 
+With obtained results null hypothesis of Friedmann test was rejected at significance level $\alpha = 0.05$ (see Table \ref{table:svm_pvalues}). 
+Results of post-hoc Nemenyi tests for FE methods similarity were shown in Table \ref{tab:svm_posthoc_pvalues}. 
+Average ranks obtained in post hoc testing for CNN, LDA and PCA were correspondingly: 2.708, 1.917 and 1.375.
+Significant diffrence in performence can be noted between CNN and PCA.
+One might find strage, that pvalue for diffrence between CNN and LDA was lower then pvalue for LDA and PCA. This is conected to problem with Nemenyi test mentioned in begining of this section. For some datasets PCA obtained better acuracy then LDA, or even CNN. The diffrence in ranks beetween average ranks for CNN and LDA was 0.791 and for LDA and PCA was 0.542. Bigger diffrence in average ranks means lower probability, that diffrence is lower then standard error, therefore pvalue is lower. 
 
 
 \subsection{Results for MLP}
@@ -359,10 +361,22 @@ Results of post-hoc Nemenyi tests for FE methods similarity were shown in Table 
     \label{fig:svm_fit_time_comparision}
 \end{figure*}
 
-Ranks obtained with post hoc tests: 2.625 2.125 1.25.
+With obtained results null hypothesis of Friedmann test was rejected at significance level $\alpha = 0.05$ (see Table \ref{table:svm_pvalues}). 
+Results of post-hoc Nemenyi tests for FE methods similarity were shown in Table \ref{tab:svm_posthoc_pvalues}. 
+Average ranks obtained in post hoc testing for CNN, LDA and PCA were correspondingly: 2.625, 2.125 and 1.25.
+With $\alpha = 0.05$ null hypothesis was rejected for CNN and PCA.
+Very low pvalue was reported for LDA and PCA, and this is in line with obtained diffrence in average ranks equal 0.875.
 
 
 \section{Conclusions}
+
+Experiments were carried out with established methodology. Results were colected and analysed. Some flaws in chosen methodology were pointed out, and considered durning analysis of results.
+
+For both SVC and MLP performance obtained by CNN was better then performance of PCA. No statistical diffrence was noted beetween LDA and PCA, although PCA with SVC had some clear problems with some databases, especially with datasets with diffrent face orientation (eg. att, georgia, muct or stirling).
+
+Time of traninig was reported in this article, but only for illustrative purposes. No statistical analysis of traning time was performed.
+
+%During tests perfming some problems occured. For some dataset with large number of images Python virtual machine run out of memory on machine with 8 Gb RAM. This happend during computing eigenvalues and eigenvectors of $S_W$ matrix (when establishing within variance) while performing LDA for vidtimit dataset. $A_i$ (see equation \ref{eq:SW}) contains only images for $i$-th class. Maximal number of images for one class in vidtimit is 2644. Images are stored using 8 bit uint type. All images are converted to greyscale, so there is one 8 bit unsigned int per pixel. Sckit-learn use SVD implementation from numpy to establish eigenvalues and eigenvectors of $S_W$. In theory memory needed for storage of SVDs decomposition matrixes given all previous asumptions is aproximatly 0.25 Gb, which should not be problem. Numpy utilises Lapack library for SVD computation. Lapack is linear algebra library written in Fortran. There is little known about alorithms used to perform SVD in Lapack, therefore reason of raising MemoryError cannot be established. This problem was omitted by performing tests on machine with 16 Gb RAM. 
 
 
 \bibliographystyle{plabbrv}
