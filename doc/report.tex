@@ -239,9 +239,9 @@ Analysis of results was performed using Friedman test with Nemenyi post-hoc test
 
 Tests were performed separately for SVC and MLP classifiers for all FE methods. Obtained accuracy and training time were presented in below tables and plots.
 
-Nemenyi test ranks perfomernce of algithms for each dataset, then calculates mean of ranks for algorithms. Means are tested using Tukey test (to be more precise: diffrence of means are compared to standard error), to check if there is singnificant diffrence in performance over multiple datasets. In case of 3 datasets there are only 3 ranks, that can be obtained. Each rank for chosen algorithm and dataset can take value 1, 2 or 3, therefore diffrence between mean ranks will not obtain large value (in fact maximal diffrence between mean ranks is 2). Significant diffrence will be noted by Neymani test between two algrithms achiving mostly ranks 1 or 3. This is clear limitation of post hoc analysis in this case. Suppose we got two algorithms with good performence (algorithms A and B) and one algrithm with poor performance (algorithm C). Algorithm A is slightly beeter then algorithm B, therefore obtains more frequently rank 3. In this case due to comparing only avrage ranks sigginifcant diffrence between algorithm A and C will be reported, and no significant diffrence will be reported for algorithms B and C. This was taken into consideration in further analysis of results.
+The Nemenyi test ranks performance of algorithms for each dataset, then it calculates the mean of ranks for algorithms. In the next step means are tested using Tukey test (to be more precise: differences of means are compared to the standard error), to check if there is a significant difference in performance over multiple data sets. In case of 3 data sets there are only 3 ranks, that can be obtained. Each rank for chosen algorithm and dataset can take value of 1, 2 or 3, therefore difference between mean ranks will not be a large value (in fact maximal difference between mean ranks is 2). Significant difference will be noted by Nemenyi test between two algorithms which achieve ranks 1 or 3. This is a clear limitation of post-hoc analysis in this case. Suppose we have got two algorithms with a good performance (A and B) and one algorithm with a poor performance (C). Algorithm A is slightly better then algorithm B, therefore it obtains more frequently rank 3. In this case due to comparing only average ranks significant difference between algorithms A and C will be reported, and no significant difference will be reported for algorithms B and C. This was taken into consideration in further analysis of results.
 
-Also important issue with Stirling faces database was found. With aprroximate 9 images per class 10 fold Stratified Cross Validation cannot be performed. $N$ fold Stratified Cross Validation requiers at least $N$ images for each class. To overcome this problem oversampling of Stirling database was introduced.
+Also important issue with Stirling faces database was found. With approximate 9 images per class 10 fold Stratified Cross Validation cannot be performed. $N$ fold Stratified Cross Validation requires at least $N$ images per class. To overcome this problem Stirling database was oversampled.
 
 
 \subsection{Results for SVC}
@@ -249,28 +249,28 @@ Also important issue with Stirling faces database was found. With aprroximate 9 
 
 \begin{table}[!h]
     \centering
-    \caption{Comparison of avrage accuracy of Svc classifier for chosen FE methods and datasets}
+    \caption{Comparison of average accuracy of SVC classifier for chosen FE methods and datasets}
     \input{tables/Svm_acc_table.tex}
     \label{table:svm_acc_comparison}
 \end{table}
 
 \begin{table}[!h]
     \centering
-    \caption{Comparison of avrage time of traning Svc classifier for chosen FE methods and datasets}
+    \caption{Comparison of average time of training SVC classifier for chosen FE methods and datasets}
     \input{tables/Svm_fit_time_table.tex}
     \label{table:svm_fit_time_comparison}
 \end{table}
 
 \begin{table}[!h]
     \centering
-    \caption{Comparison of p-values and F-values for Friedman test for Svc classifier}
+    \caption{Comparison of p-values and F-values for Friedman test for SVC classifier}
     \input{tables/Svm_pvalues.tex}
     \label{table:svm_pvalues}
 \end{table}
 
 \begin{table}[!h]
     \centering
-    \caption{Pvalues of Neymani posthoc tests for Svc classifier.}
+    \caption{Pvalues of Neymani post-hoc tests for SVC classifier.}
     \begin{tabular}{|c|c|c|c|}
          \hline
           & CNN & LDA & PCA \\
@@ -288,37 +288,40 @@ Also important issue with Stirling faces database was found. With aprroximate 9 
 \begin{figure*}[!h]
     \centering
     \includegraphics[scale=0.875]{images/Svm_accuracy_comparison.png}
-    \caption{Comparison of avrage accuracy of Svc classifier for chosen FE methods and datasets}
+    \caption{Comparison of average accuracy of SVC classifier for chosen FE methods and datasets}
     \label{fig:svm_acc_comparision}
 \end{figure*}
 
 \begin{figure*}[!h]
     \centering
     \includegraphics[scale=0.875]{images/Svm_fit_time_comparison.png}
-    \caption{Comparison of avrage time of traning Svc classifier for chosen FE methods and datasets}
+    \caption{Comparison of average time of training SVC classifier for chosen FE methods and datasets}
     \label{fig:svm_fit_time_comparision}
 \end{figure*}
 
+\newpage
+
 With obtained results null hypothesis of Friedmann test was rejected at significance level $\alpha = 0.05$ (see Table \ref{table:svm_pvalues}). 
 Results of post-hoc Nemenyi tests for FE methods similarity were shown in Table \ref{tab:svm_posthoc_pvalues}. 
-Average ranks obtained in post hoc testing for CNN, LDA and PCA were correspondingly: 2.708, 1.917 and 1.375.
-Significant diffrence in performence can be noted between CNN and PCA.
-One might find strage, that pvalue for diffrence between CNN and LDA was lower then pvalue for LDA and PCA. This is conected to problem with Nemenyi test mentioned in begining of this section. For some datasets PCA obtained better acuracy then LDA, or even CNN. The diffrence in ranks beetween average ranks for CNN and LDA was 0.791 and for LDA and PCA was 0.542. Bigger diffrence in average ranks means lower probability, that diffrence is lower then standard error, therefore pvalue is lower. 
+Average ranks obtained in post-hoc testing for CNN, LDA and PCA were correspondingly: 2.708, 1.917 and 1.375.
+Significant difference in performance can be noted between CNN and PCA.
+P-value for difference between CNN and LDA was lower then for LDA and PCA, what might be confusing. This is connected to the problem with Nemenyi test was mentioned in the beginning of this section. For some datasets PCA obtained better accuracy then LDA, or even CNN. The difference in ranks between average ranks for CNN and LDA was 0.791 and for LDA and PCA was 0.542. Bigger difference in average ranks means lower probability, that difference is lower then standard error, therefore p-value is lower. 
 
+\newpage
 
 \subsection{Results for MLP}
 
 
 \begin{table}[!h]
     \centering
-    \caption{Comparison of avrage accuracy of MLP classifier for chosen FE methods and datasets}
+    \caption{Comparison of average accuracy of MLP classifier for chosen FE methods and datasets}
     \input{tables/NN_acc_table.tex}
     \label{table:NN_acc_comparison}
 \end{table}
 
 \begin{table}[!h]
     \centering
-    \caption{Comparison of avrage time of traning MLP classifier for chosen FE methods and datasets}
+    \caption{Comparison of average time of training MLP classifier for chosen FE methods and datasets}
     \input{tables/NN_fit_time_table.tex}
     \label{table:NN_fit_time_comparison}
 \end{table}
@@ -332,7 +335,7 @@ One might find strage, that pvalue for diffrence between CNN and LDA was lower t
 
 \begin{table}[!h]
     \centering
-    \caption{Pvalues of Neymani posthoc tests for MLP classifier.}
+    \caption{P-values of Nemenyi post-hoc tests for MLP classifier.}
     \begin{tabular}{|c|c|c|c|}
          \hline
           & CNN & LDA & PCA \\
@@ -350,31 +353,33 @@ One might find strage, that pvalue for diffrence between CNN and LDA was lower t
 \begin{figure*}[!h]
     \centering
     \includegraphics[scale=0.875]{images/NN_accuracy_comparison.png}
-    \caption{Comparison of avrage accuracy of MLP classifier for chosen FE methods and datasets}
+    \caption{Comparison of average accuracy of MLP classifier for chosen FE methods and datasets}
     \label{fig:NN_acc_comparision}
 \end{figure*}
 
 \begin{figure*}[!h]
     \centering
     \includegraphics[scale=0.875]{images/NN_fit_time_comparison.png}
-    \caption{Comparison of avrage time of traning MLP classifier for chosen FE methods and datasets}
+    \caption{Comparison of average time of training MLP classifier for chosen FE methods and datasets}
     \label{fig:svm_fit_time_comparision}
 \end{figure*}
+
+\newpage
 
 With obtained results null hypothesis of Friedmann test was rejected at significance level $\alpha = 0.05$ (see Table \ref{table:svm_pvalues}). 
 Results of post-hoc Nemenyi tests for FE methods similarity were shown in Table \ref{tab:svm_posthoc_pvalues}. 
 Average ranks obtained in post hoc testing for CNN, LDA and PCA were correspondingly: 2.625, 2.125 and 1.25.
 With $\alpha = 0.05$ null hypothesis was rejected for CNN and PCA.
-Very low pvalue was reported for LDA and PCA, and this is in line with obtained diffrence in average ranks equal 0.875.
+Very low p-value was reported for LDA and PCA, and this is in line with obtained difference in average ranks that equal to 0.875.
 
 
 \section{Conclusions}
 
-Experiments were carried out with established methodology. Results were colected and analysed. Some flaws in chosen methodology were pointed out, and considered durning analysis of results.
+Experiments were carried out with established methodology. Results were collected and analysed. Some flaws in chosen methodology were pointed out and considered during analysis of results.
 
-For both SVC and MLP performance obtained by CNN was better then performance of PCA. No statistical diffrence was noted beetween LDA and PCA, although PCA with SVC had some clear problems with some databases, especially with datasets with diffrent face orientation (eg. att, georgia, muct or stirling).
+For both SVC and MLP performance obtained by CNN was better then performance of PCA. No statistical difference was noted between LDA and PCA, although PCA with SVC had some clear problems with some databases, especially with datasets with different face orientation (eg. att, georgia, muct or stirling).
 
-Time of traninig was reported in this article, but only for illustrative purposes. No statistical analysis of traning time was performed.
+Time of training was reported in this article, but only for illustrative purposes. No statistical analysis of training time was performed.
 
 %During tests perfming some problems occured. For some dataset with large number of images Python virtual machine run out of memory on machine with 8 Gb RAM. This happend during computing eigenvalues and eigenvectors of $S_W$ matrix (when establishing within variance) while performing LDA for vidtimit dataset. $A_i$ (see equation \ref{eq:SW}) contains only images for $i$-th class. Maximal number of images for one class in vidtimit is 2644. Images are stored using 8 bit uint type. All images are converted to greyscale, so there is one 8 bit unsigned int per pixel. Sckit-learn use SVD implementation from numpy to establish eigenvalues and eigenvectors of $S_W$. In theory memory needed for storage of SVDs decomposition matrixes given all previous asumptions is aproximatly 0.25 Gb, which should not be problem. Numpy utilises Lapack library for SVD computation. Lapack is linear algebra library written in Fortran. There is little known about alorithms used to perform SVD in Lapack, therefore reason of raising MemoryError cannot be established. This problem was omitted by performing tests on machine with 16 Gb RAM. 
 
