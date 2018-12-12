@@ -321,8 +321,8 @@ During experiment an important issue with Stirling faces database was found. Wit
 
 With obtained results null hypothesis of Friedmann test was rejected at a significance level of $\alpha = 0.05$ (see Table \ref{table:svm_pvalues}). 
 Results of post-hoc Nemenyi tests for FE methods similarity were shown in Table \ref{tab:svm_posthoc_pvalues}. 
-Average ranks obtained in post-hoc testing for CNN, LDA and PCA equal correspondingly: 2.708, 1.917 and 1.375.
-Significant difference in performance can be noted between CNN and PCA.
+Average ranks obtained in post-hoc testing for CNN, LDA and PCA were equal correspondingly: 2.708, 1.917 and 1.375.
+Significant difference in performance was noted between CNN and PCA.
 P-value for difference between CNN and LDA was lower then for LDA and PCA, what might be confusing. This is connected to the problem with Nemenyi test that was mentioned in the beginning of this section. For some datasets PCA obtained better accuracy then LDA, or even CNN. The difference in ranks between average ranks for CNN and LDA was 0.791 and for LDA and PCA was 0.542. Bigger difference in average ranks means lower probability that difference is lower then the standard error, therefore a p-value is lower. 
 
 \newpage
@@ -388,19 +388,20 @@ According to the obtained results null hypothesis of Friedmann test was rejected
 Results of a post-hoc Nemenyi tests for FE methods similarity were shown in Table \ref{tab:NN_posthoc_pvalues}. 
 Average ranks obtained in post hoc testing for CNN, LDA and PCA equal correspondingly: 2.625, 2.125 and 1.25.
 With $\alpha = 0.05$ null hypothesis was rejected for CNN and PCA.
-Very low p-value was reported for LDA and PCA, and this is in line with obtained difference in average rank that equals 0.875.
+Very low p-value was reported for LDA and PCA. This value is in line with obtained difference in average rank that equals 0.875.
 
 \newpage
 
 
 \section{Conclusions}
 
-Experiments were carried out with established methodology. Results were collected and analysed. For both SVC and MLP classifiers performance obtained by CNN was better than performance of PCA and LDA. No statistical difference was noted between LDA and PCA. Besides that, PCA in usage with SVC had some problems with few databases, especially with datasets containing different face orientations (f.e.. att, georgia, muct or stirling). Some flaws in chosen methodology were pointed out and taken into consideration during the analysis of results.
+Experiments were carried out with established methodology. Stratified 10-fold cross validation proved itself to be a good choice for performing validation over multiple datasets. During experiments FE algorithms were trained on the same training set as the classifier, to achieve separation of training data from testing data for both FE methods and classifiers. Due to this restriction experiments were computionaly expensive, but provided more reliable results. Validation can be further improved by using 10-fold cross validation repeated 10 times with averaging obtained results. This idea was not used in prepared experiment because of computational power limitations. Usage of a scikit-learn cross validation allowed to save time by not writing custom implementations.
 
-10-fold cross validation was a good choice for performing validation on multiple datasets that resulted in well calculated performance of implemented models. Obtained accuracy plots was in step with p-values.  Time of the training was reported in this article, but only for illustrative purposes. No statistical analysis of training time was performed. Usage of a scikit-learn cross validation allowed to save time by not writing custom implementations. In the future experiments validation can be improved by using 10-fold cross validation for 10 times and averaging obtained results. This idea was not used in prepared experiment because of computational power limitation.
+Results were collected and analysed. For both SVC and MLP classifiers CNN yielded better performance than PCA and LDA. No statistical difference was noted between LDA and PCA. Some problems for PCA combined with SVC can be found for few datasets, especially for datasets with different face orientations (e.g. att, georgia, muct or stirling). Obtained p-values of post hoc tests are intuitively in step with average accuracy for all datasets. This indicates, that statistical methods employed for verification were suitable for analysed problem, and also there is low chance, that reported results of statistical analysis are not valid.
 
+Training time was reported in this article, but only for illustrative purposes. No statistical analysis of training time was performed. One may notice here, that training time of SVC with CNN FE for 8 out of 12 databases was longer, then for other FE algorithms. Also training time of MLP for CNN FE for 10 out of 12 databases was longer, then for PCA and LDA.
 
-%During tests perfming some problems occured. For some dataset with large number of images Python virtual machine run out of memory on machine with 8 Gb RAM. This happend during computing eigenvalues and eigenvectors of $S_W$ matrix (when establishing within variance) while performing LDA for vidtimit dataset. $A_i$ (see equation \ref{eq:SW}) contains only images for $i$-th class. Maximal number of images for one class in vidtimit is 2644. Images are stored using 8 bit uint type. All images are converted to greyscale, so there is one 8 bit unsigned int per pixel. Sckit-learn use SVD implementation from numpy to establish eigenvalues and eigenvectors of $S_W$. In theory memory needed for storage of SVDs decomposition matrixes given all previous asumptions is aproximatly 0.25 Gb, which should not be problem. Numpy utilises Lapack library for SVD computation. Lapack is linear algebra library written in Fortran. There is little known about alorithms used to perform SVD in Lapack, therefore reason of raising MemoryError cannot be established. This problem was omitted by performing tests on machine with 16 Gb RAM. 
+In the future experiments CNN can be compared with other FE methods. Also other choice of datasets could result in different results. Analysis of training time can be performed, but one may find difficult to estimate how reliable are results. This is due to many factors, that can influence such experiment (e.g. various implementations of algorithms, operating systems, architecture of processor, optimisations introduced by virtual machine). 
 
 
 \bibliographystyle{plabbrv}
