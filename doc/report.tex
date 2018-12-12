@@ -1,4 +1,4 @@
-\documentclass[a4paper, 10 pt, conference]{ieeeconf}
+\documentclass[a4paper, 10 pt, journal]{ieeeconf}
 \overrideIEEEmargins
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
@@ -59,44 +59,48 @@ Methods of feature extraction for broad and deep datasets
 
 \selectlanguage{english}
 \begin{abstract}
-
+Feature extraction is an important element in data preprocessing and it is commonly used in different areas of data science. This paper focuses on comparison of three different feature extraction algorithms, such as convolutional neural networks, principal component analysis and linear discriminant analysis. Methods were trained with 12 databases, evaluated using 10-fold stratified cross validation and compared by two classifiers - multilayer perceptron and support vector classifier. The experimental results show that the performance of convolutional neural networks is the best from all selected methods.
 \end{abstract}
+
+\begin{keywords}
+Feature extraction (FE), principal component analysis (PCA), linear discriminant analysis (LDA), convolutional neural networks (CNN), balanced local discriminant embedding (BLDE), hyperspectral images (HSI), logistic regression (LR), stacked autoencoder (SAE), deep brief network (DBN), spatial pyramid pooling (SPP), propagation filder (PF), support vector machine (SVM), multilayer perceptron (MLP), support vector classifier (SVC), rectified linear unit (ReLU).
+\end{keywords}
 
 \section{Introduction}
 
-Feature extraction (FE) is a fundamental part of Machine Learning. Its main responsibility it to make sure that our classifiers won't get tons of unnecessary data on their inputs. We can divide FE algorithms into two groups: statistical and non-statistical. The group of statistical methods contains algorithms like Principle Component Analysis (PCA) or Linear Discriminant Analysis (LDA). In the second group we can find methods based on artificial intelligence, such as Convolutional Neural Networks (CNN). 
+Feature extraction (FE) is the fundamental part of Machine Learning. Its main responsibility it to make sure that our classifiers won't get tons of unnecessary data on their inputs. We can divide FE algorithms into two groups: statistical and non-statistical. The group of statistical methods contains algorithms like principle component analysis (PCA) or linear discriminant analysis (LDA). In the second group we can find methods based on artificial intelligence, such as convolutional neural networks (CNN). 
 
 Extracting particular features may help classifiers in making proper decisions, but in many cases it is not helpful for humans. When decision system is a black box, experts cannot use their intuition to predict the output, they also have no explanation why such decision was made. For example, it cannot be deduced why hospital diagnostic system assigned particular set of symptoms to the disease, or why loan request was rejected by the bank system.
 
-Feature extraction methods can be straightly connected with the field of studies and analysed data. Therefore, many algorithms are composed to give the best performance for specific domain or particular type of data. With regard to this fact, in this article both basic FE methods and state-of-the-art solutions will be analysed and compared. The main focus will be put on the comparison of PCA, LDA, and CNN approaches by applying them to two datasets and testing their effectiveness on the selected classifiers.
+Feature extraction methods can be straightly connected with the field of studies and analysed data. Therefore, many algorithms are composed to give the best performance for specific domain or particular type of data. With regard to this fact, in this article both basic FE methods and state-of-the-art solutions will be analysed and compared. The main focus will be put on the comparison of PCA, LDA, and CNN approaches by applying them to 12 datasets and testing their effectiveness on 2 selected classifiers.
 
 \section{Related work}
 PCA was introduced in 1901 paper \cite{PCA}. Currently it is one of the most popular feature extraction algorithms. It applies to many fields, especially to computer vision \cite{PCA_book}. Methods such as Robust PCA, Simplified PCA or Functional PCA were described in \cite{PCA_recent}. More insight into RPCA was given in \cite{RPCA}.
 
-Linear Discriminant Analysis (LDA) was introduced in \cite{LDA} as a solution for binary classification problem. Important adjustments was made in \cite{multi_LDA}, that enabled usage of LDA for multi-class problem. Authors of \cite{LDA_recent} focused mainly on the problem of LDA for small sample size data, which is not relevant in case of this work, but it gives a good overview on the research done recently in this field.
+LDA was introduced in \cite{LDA} as a solution for binary classification problem. Important adjustments were made in \cite{multi_LDA} that enabled usage of LDA for multi-class problem. Authors of \cite{LDA_recent} focused mainly on the problem of LDA for small sample size data, which is not relevant in case of this work, but it gives a good overview on the research done recently in this field.
 
-Balanced local discriminant embedding (BLDE) and convolutional neural networks (CNN) as methods for spacial-domain and spectral-domain feature extraction were proposed in \cite{blde-cnn}. BLDE was used as a first part of the described hyperspectral images (HSI) classifier. Its task was to find a low-dimensional representation of classified images. Second part included CNN framework designed especially for extracting high level deep features. Extracted features were then stacked and input into Logistic Regression (LR) classifier. Usage of convolutional neural networks for feature extraction purposes was also proposed in \cite{cnn}. In this case, 3-D CNN model with combined regularization was used in spectral-spacial feature extraction. Comparison of 3-D CNN model with another deep learning based methods, like stacked autoencoder (SAE), deep brief network (DBN) or 2D-CNN-based method was described in \cite{cnn2}. Another CNN-based deep learning approach was shown in \cite{cnn3}. Proposed approach assumed usage of the special type of CNN architecture - Deep Pyramidal Residual Network. The specific part of this architecture were pyramidal bottleneck residual blocks of convolutional layers. It allows to gradually increase the feature map dimension at all convolutional layers, what leads to involving more locations as the network depth increases, balancing the workload among all units and preserving the time complexity on each layer. Another solution for improving spectral-spatial feature extraction was proposed in \cite{cnn4}. Traditional pooling layer of CNN was replaced with spatial pyramid pooling (SPP), what resulted in increasement of extraction effectiveness.
+Balanced local discriminant embedding (BLDE) and convolutional neural networks as methods for spacial-domain and spectral-domain feature extraction were proposed in \cite{blde-cnn}. BLDE was used as a first part of the described hyperspectral images (HSI) classifier. Its task was to find a low-dimensional representation of classified images. Second part included CNN framework designed especially for extracting high level deep features. Extracted features were then stacked and input into logistic regression (LR) classifier. Usage of convolutional neural networks for feature extraction purposes was also proposed in \cite{cnn}. In this case, 3-D CNN model with combined regularization was used in spectral-spacial feature extraction. Comparison of 3-D CNN model with another deep learning based methods, like stacked autoencoder (SAE), deep brief network (DBN) or 2D-CNN-based method was described in \cite{cnn2}. Another CNN-based deep learning approach was shown in \cite{cnn3}. Proposed approach assumed usage of the special type of CNN architecture - Deep Pyramidal Residual Network. The specific part of this architecture were pyramidal bottleneck residual blocks of convolutional layers. It allows to gradually increase the feature map dimension at all convolutional layers, what leads to involving more locations as the network depth increases, balancing the workload among all units and preserving the time complexity on each layer. Another solution for improving spectral-spatial feature extraction was proposed in \cite{cnn4}. Traditional pooling layer of CNN was replaced with spatial pyramid pooling (SPP), what resulted in increasement of extraction effectiveness.
 
 A different approach, based on propagation filter (PF), was presented in \cite{propagation-filter}. First, the PCA algorithm was used in order to reduce HSI dimensionality. Then, the extracted principal components were filtered with the PF. In the last step of the experiment, extracted and filtered spectral-spatial features were input into support vector machine (SVM) classifiers to test the effectiveness of the classification.
 
 \section{Methods}
 
 \subsection{Principle Component Analysis}
-PCA allows to reduce dimensionality of selected dataset. It results in maximising the variance of dataset by the new basis of lower dimensional space. Let's suppose that space $\mathbb{R}^{M}$ is given and we want to lower its dimension to $D$. We want to find projection matrix that enables this transformation of space. We also want to lose as little information as possible. In this case, using PCA requires calculation of eigenvalues and eigenvectors of covariance matrix $S$ (or evaluation of scatter matrix $A$, and calculating eigenvalues and eigenvectors of $\frac{1}{N}AA^{T}$ matrix). $D$ eigenvectors, that correspond to the biggest eigenvalues are used as a basis of a new space. These eigenvectors point the directions of the biggest change of variance in data.  The same problem can be reframed as maximalization of variance while projecting on vector $\bb{u}$:
+PCA allows to reduce dimensionality of the selected dataset. It results in maximising the variance of dataset by the new basis of lower dimensional space. Let's suppose that space $\mathbb{R}^{M}$ is given and we want to lower its dimension to $D$. We want to find projection matrix that enables this transformation of space. We also want to lose as little information as possible. In this case, using PCA requires calculation of eigenvalues and eigenvectors of covariance matrix $S$ (or evaluation of scatter matrix $A$, and calculating eigenvalues and eigenvectors of $\frac{1}{N}AA^{T}$ matrix). $D$ eigenvectors, that correspond to the biggest eigenvalues are used as a basis of a new space. These eigenvectors point the directions of the biggest change of variance in data.  The same problem can be reframed as maximalization of  a variance while projecting on vector $\bb{u}$:
 
 \begin{align}
 	f(\bb{u}) &= \bb{u}^T S \bb{u} \\
 	g(\bb{u}) &= 1 - \bb{u}^T \bb{u} = 0   \notag
 \end{align}
 
-where $f$ is variation while projecting on $\bb{u}$, and is additional constriction that yields $||\bb{u}||_{2} = 1$. The same can be formulated as Lagrangian:
+where $f$ is a variation while projecting on $\bb{u}$ and it is an additional constriction that yields $||\bb{u}||_{2} = 1$. The same can be formulated as Lagrangian:
 
 \begin{align}
 	\mathcal{L}(\bb{u}, \lambda) &= f(\bb{u}) - \lambda g(\bb{u}) \\
 	    &= \bb{u}^T S \bb{u} - \lambda (1 - \bb{u}^T \bb{u})   \notag
 \end{align}
 
-and solved as optimization with the constrain problem. Please note that covariance matrix is symmetrical, i.e. it can be written as $S = Q \Lambda Q^{T}$, where $Q$ is an orthogonal matrix, and $\Lambda$ is a diagonal matrix with the real eigenvalues of $S$. According to this fact, finding new basis is always possible and new basis is always orthogonal.
+and solved as optimization with the constrain problem. Please note that covariance matrix is symmetrical, i.e. it can be written as $S = Q \Lambda Q^{T}$, where $Q$ is an orthogonal matrix, and $\Lambda$ is a diagonal matrix with the real eigenvalues of $S$. According to this fact, finding a new basis is, which is always orthogonal, is always possible.
 
 Taking $\bb{u}_{n}$ as $n$-th eigenvector of covariance matrix, projection matrix $P$ can be written as:
 
@@ -115,7 +119,7 @@ More insight into the theory of PCA is given in \cite{Pattern_recognition}.
 
 \subsection{Linear Discriminant Analysis}
 
-LDA is a supervised dimensionality reduction algorithm, which aims to increase the linear separation of classes after projecting the orignal space. In order achieve this goal Fischer criterion is used:
+LDA is a supervised dimensionality reduction algorithm, which aims to increase the linear separation of classes after projecting the orignal space. In order to achieve this goal the Fischer criterion is used:
 
 \begin{equation}
     \argmax_{W} \frac{W^{T} S_{B} W}{W^{T} S_{W} W}
@@ -128,7 +132,7 @@ where $S_{B}$ is a between-class covariance, and $S_{W}$ is a within-class covar
     S_B = \sum_{i} (\mu_{i} - \mu)(\mu_{i} - \mu)^{T}
 \end{equation}
 
-where $\mu_i = \frac{1}{n_{c_i}} \sum_{j=1}^{n_{c_j}} x_i$ is an average of samples from $i$-th class, and $\mu = \frac{1}{N} \sum_{j=1}^{N} x_j$ is an average of all samples. $S_B$ can be used to describe the distance between classes after performing projection on $W$:
+where $\mu_i = \frac{1}{n_{c_i}} \sum_{j=1}^{n_{c_j}} x_i$ is an average value of samples from $i$-th class, and $\mu = \frac{1}{N} \sum_{j=1}^{N} x_j$ is an average value of all samples. $S_B$ can be used to describe the distance between classes after performing projection on $W$:
 
 \begin{align}
     (m_i - m)^2 &= (W^T \mu_i - W^T \mu)^2 \nonumber \\
@@ -136,7 +140,7 @@ where $\mu_i = \frac{1}{n_{c_i}} \sum_{j=1}^{n_{c_j}} x_i$ is an average of samp
                 &= W^T S_{B_i} W \nonumber
 \end{align}
 
-So, maximizing the nominator of the Fischer criterion results in best linear separability after projection to lower-dimension space.
+So, maximizing the nominator of the Fischer criterion results in the best linear separability after projection to lower-dimension space.
 $S_{W}$ is defined as:
 
 \begin{equation}
@@ -144,7 +148,7 @@ $S_{W}$ is defined as:
     \label{eq:SW}
 \end{equation}
 
-where $A_i$ is matrix of all samples $X_i$ from class $i$ reduced by $\mu_i$. $S_W$ is used to describe distance between samples of the chosen class and its mean after projection:
+where $A_i$ is matrix of all samples $X_i$ from class $i$ reduced by $\mu_i$. $S_W$ is used to describe a distance between samples of the chosen class and its mean after projection:
 
 \begin{align}
     (W^{T} X_i - M_i)^2 &= (W^{T} X_i - W^{T} U_i)^2 \nonumber \\
@@ -162,9 +166,9 @@ Equation [\ref{eq:Fischer_criterion}] can be also formulated as:
 
 This corresponds to finding eigenvalues and eigenvectors of $S_{W}^{-1} S_{B}$ matrix. Choosing $D$ eigenvectors with the largest corresponding eigenvalues as a base of the new space $\mathbb{R}^D$ guaranties good linear separability between classes. 
 
-\subsection{Convolutional Neural Networks}
+\subsection{Convolutional neural networks}
 
-Convolutional Neural Network is a special type of neural network that is mainly based on the mathematical operation called convolution and the mechanism of pooling. Convolution in general is a linear operation on two functions of a real valued arguments. Let's assume that $x(t)$ is a function output of some operation that is performed on data $t$, which is usually called input and $w(t)$ is another operation that is called kernel. $s(t)$ is a convolution output that is sometimes referred as a feature map. Then we can define convolution as below:
+Convolutional neural network is a special type of neural network that is mainly based on the mathematical operation called convolution and the mechanism of pooling. Convolution in general is a linear operation on two functions of a real valued arguments. Let's assume that $x(t)$ is a function output of some operation that is performed on data $t$, which is usually called input and $w(t)$ is another operation that is called kernel. $s(t)$ is a convolution output that is sometimes referred as a feature map. Then we can define convolution as below:
 
 \begin{equation}
     s(t) = (x*w)(t) = \int x(a)w(t-a)da
@@ -182,13 +186,13 @@ For two-dimensional data, like image I and kernel K we define convolution as:
     s(i, j) = (I*K)(i, j) = \sum_m \sum_n I(i-m, j-n)K(m, n)
 \end{equation}
 
-According to \cite{Goodfellow-et-al-2016}, convolution operation is used in the first of  the three main stages of convolutional layer. This stage produces a set of linear activations by performing several convolutions in parallel. Second stage, sometimes called the detector stage, is responsible for passing linear activations through a nonlinear activation function, such as the rectified linear activation function. The last stage is based on a pooling function, which modifies the output of layer further. This function replaces the network output at certain location with a summary statistic of the nearby outputs. In some cases convolution, detector, and pooling stages are considered as separated network layers.
+According to \cite{Goodfellow-et-al-2016}, convolution operation is used in the first of  the three main stages of convolutional layer. This stage produces a set of linear activations by performing several convolutions in parallel. Second stage, sometimes called the detector stage, is responsible for passing linear activations through a nonlinear activation function, such as the rectified linear unit (ReLU) activation function. The last stage is based on a pooling function, which modifies the output of layer further. This function replaces the network output at certain location with a summary statistic of the nearby outputs. In some cases convolution, detector, and pooling stages are considered as separated network layers.
 
 \section{Experimental settings}
 
 \subsection{Data sets description}
 
-\textsl{No free lunch theorems for Optimization} \cite{no-free-lunch} states that there is no general algorithm suited to solve all problems. Machine learning algorithms accuracy may depend on the application and the character of used data \cite{alppaydin}. For that reason datasets containing faces were chosen in order to perform comparison of selected extraction methods. These kind of datasets contain a lot of samples. Each sample contain many features, what suits the criterion of broad and deep datasets. Each pixel in image can be considered as a separate dimension. Chosen datasets are compared in table \ref{tab:datasets}.
+\textsl{No free lunch theorems for Optimization} \cite{no-free-lunch} states that there is no general algorithm suited to solve all problems. Machine learning algorithms accuracy may depend on the application and the character of used data \cite{alppaydin}. For that reason datasets containing faces were chosen in order to perform comparison of selected extraction methods. These kind of datasets contain a lot of samples. Each sample contain many features, what suits the criterion of broad and deep datasets. Each pixel in an image can be considered as a separate dimension. Chosen datasets are compared in table \ref{tab:datasets}.
 
 \begin{table}[!h]
     \centering
@@ -225,36 +229,38 @@ According to \cite{Goodfellow-et-al-2016}, convolution operation is used in the 
     \label{tab:datasets}
 \end{table}
 
+
+
 All images in chosen datasets contain varying lightning conditions, emotion expressions, face angles, varying ethnicity, sex and age of the subjects. Pictures were converted to the grayscale before performing feature extraction. 
+
+\newpage
 
 \subsection{Experiment description}
 
-PCA, LDA, and CNN-based feature extraction methods and classifiers were trained using same training set. Models were evaluated using 10-fold stratified cross validation, which guarantee, that both training and test sets contain proportional number of images for each class. Accuracy was chosen as measure. The results for given classifier were given as an fold-wise average of all results obtained via cross validation.
+PCA, LDA, CNN-based feature extraction methods and classifiers were trained using the same training set. Models were evaluated with 10-fold stratified cross validation, which guarantees that both training and test sets contain proportional number of images for each class. Accuracy was chosen as a main measure. The results for given classifier were given as an fold-wise average of all results obtained via cross validation.
 
-Classifiers used for comparison of feature extraction methods were Neural Network and Svc. All classifiers hyperparameters were fixed during whole experiment. Searching for the best hyperparameters for each dataset and extraction method could compromise gathered results of experiment.
+Multilayer perceptron (MLP) and support vector classifier (SVC) were used for comparison of feature extraction methods. All classifiers hyperparameters were fixed during the whole experiment. Searching for the best hyperparameters for each dataset and extraction method could compromise gathered results of experiment.
 
 Analysis of results was performed using Friedman test with Nemenyi post-hoc test, as suggested in \cite{demsar}.
 
 \subsection{Used tools}
 
-All tests were performed with Pytohn 3.6. Keras implementations of CNN and scikit-learn implementation of LDA and PCA were emplyed to perform tests. Some image operation during preprocessing of images were performed with opencv3 library. Svm and MLP implementations were imported from scikit-learn. Statistical analysis was performed using numpy, scipy library stats module, and implementation of Nemenyi post hoc test avaliable in \cite{post_hoc_nemenyi}.
+All tests were performed with Pytohn 3.6. Keras implementations of CNN and scikit-learn implementation of LDA and PCA were used to perform tests. Image operations during preprocessing were implemented with opencv3 library. SVM and MLP classifiers implementations were imported from scikit-learn. Statistical analysis was done using numpy, scipy library stats module, and implementation of Nemenyi post-hoc test avaliable in \cite{post_hoc_nemenyi}.
 
 \subsection{Hyperparameters of FE methods}
 
-For PCA and LDA decomposition with 100 components was performed. Most common aproach with PCA is to take components, that are responsible for 95\% of variance in the dataset. This approach can give better results in some cases, but is very expensive computationaly, espetialy for 10 fold cross validation. 
+For PCA and LDA a decomposition with 100 components was prepared . Most common aproach with PCA is to take components that are responsible for 95\% of variance in the dataset. This approach can give better results in some cases, but it is very computationally expensive, especially for 10-fold cross validation. 
 
-CNN architecture was based on 2 convolution layers with 7x7 and 3x3 kernels respectively, 2 pooling layers with 2x2 kernels and dense layer. Convolution layers contained Rectified Linear Unit (ReLU) activation functions. Dense layer used ReLU and Softmax activation functions. Last layer had 100 outputs for 100 components respectively.
+CNN architecture was based on 2 convolution layers with 7x7 and 3x3 kernels respectively, 2 pooling layers with 2x2 kernels and dense layer. Convolution layers contained rectified linear unit  activation functions. Dense layer used ReLU and Softmax activation functions. Last layer had 100 outputs for 100 components respectively.
 
 
 \section{Results}
 
 Tests were performed separately for SVC and MLP classifiers for all FE methods. Obtained accuracy and training time were presented in below tables and plots.
 
-The Nemenyi test ranks performance of algorithms for each dataset, then it calculates the mean of ranks for algorithms. In the next step means are tested using Tukey test (to be more precise: differences of means are compared to the standard error), to check if there is a significant difference in performance over multiple data sets. In case of 3 data sets there are only 3 ranks, that can be obtained. Each rank for chosen algorithm and dataset can take value of 1, 2 or 3, therefore difference between mean ranks will not be a large value (in fact maximal difference between mean ranks is 2). Significant difference will be noted by Nemenyi test between two algorithms which achieve ranks 1 or 3. This is a clear limitation of post-hoc analysis in this case. Suppose we have got two algorithms with a good performance (A and B) and one algorithm with a poor performance (C). Algorithm A is slightly better then algorithm B, therefore it obtains more frequently rank 3. In this case due to comparing only average ranks significant difference between algorithms A and C will be reported, and no significant difference will be reported for algorithms B and C. This was taken into consideration in further analysis of results.
+The Nemenyi test ranks performance of algorithms for each dataset, then calculates the mean of ranks for them. In the next step means are tested using Tukey test (to be more precise: differences of means are compared to the standard error) to check if there is a significant difference in performance over multiple datasets. In case of 3 data sets there are only 3 ranks that can be obtained. Each rank for chosen algorithm and dataset can take value of 1, 2 or 3, therefore difference between mean ranks will not be a large value (in fact maximal difference between mean ranks is 2). Significant difference will be noted by Nemenyi test between two algorithms which achieve ranks 1 or 3. This is a clear limitation of a post-hoc analysis in this case. Suppose we have two algorithms with a good performance (A and B) and one algorithm with a poor performance (C). Algorithm A is slightly better then algorithm B, therefore it obtains more frequently rank 3. In this case due to comparing only average ranks significant difference between algorithms A and C will be reported, and no significant difference will be reported for algorithms B and C. This was taken into consideration in the further analysis of results.
 
-Also important issue with Stirling faces database was found. With approximate 9 images per class 10 fold Stratified Cross Validation cannot be performed. $N$ fold Stratified Cross Validation requires at least $N$ images per class. To overcome this problem Stirling database was oversampled.
-
-\newpage
+During experiment an important issue with Stirling faces database was found. With about 9 images per class 10-fold stratified cross validation cannot be performed. $N$ fold stratified cross validation requires at least $N$ images per class. To overcome this problem Stirling database was oversampled.
 
 \subsection{Results for SVC}
 
@@ -313,11 +319,11 @@ Also important issue with Stirling faces database was found. With approximate 9 
 
 \newpage
 
-With obtained results null hypothesis of Friedmann test was rejected at significance level $\alpha = 0.05$ (see Table \ref{table:svm_pvalues}). 
+With obtained results null hypothesis of Friedmann test was rejected at a significance level of $\alpha = 0.05$ (see Table \ref{table:svm_pvalues}). 
 Results of post-hoc Nemenyi tests for FE methods similarity were shown in Table \ref{tab:svm_posthoc_pvalues}. 
-Average ranks obtained in post-hoc testing for CNN, LDA and PCA were correspondingly: 2.708, 1.917 and 1.375.
+Average ranks obtained in post-hoc testing for CNN, LDA and PCA equal correspondingly: 2.708, 1.917 and 1.375.
 Significant difference in performance can be noted between CNN and PCA.
-P-value for difference between CNN and LDA was lower then for LDA and PCA, what might be confusing. This is connected to the problem with Nemenyi test was mentioned in the beginning of this section. For some datasets PCA obtained better accuracy then LDA, or even CNN. The difference in ranks between average ranks for CNN and LDA was 0.791 and for LDA and PCA was 0.542. Bigger difference in average ranks means lower probability, that difference is lower then standard error, therefore p-value is lower. 
+P-value for difference between CNN and LDA was lower then for LDA and PCA, what might be confusing. This is connected to the problem with Nemenyi test that was mentioned in the beginning of this section. For some datasets PCA obtained better accuracy then LDA, or even CNN. The difference in ranks between average ranks for CNN and LDA was 0.791 and for LDA and PCA was 0.542. Bigger difference in average ranks means lower probability that difference is lower then the standard error, therefore a p-value is lower. 
 
 \newpage
 
@@ -378,22 +384,22 @@ P-value for difference between CNN and LDA was lower then for LDA and PCA, what 
 
 \newpage
 
-With obtained results null hypothesis of Friedmann test was rejected at significance level $\alpha = 0.05$ (see Table \ref{table:NN_pvalues}). 
-Results of post-hoc Nemenyi tests for FE methods similarity were shown in Table \ref{tab:NN_posthoc_pvalues}. 
-Average ranks obtained in post hoc testing for CNN, LDA and PCA were correspondingly: 2.625, 2.125 and 1.25.
+According to the obtained results null hypothesis of Friedmann test was rejected at a significance level of $\alpha = 0.05$ (see Table \ref{table:NN_pvalues}). 
+Results of a post-hoc Nemenyi tests for FE methods similarity were shown in Table \ref{tab:NN_posthoc_pvalues}. 
+Average ranks obtained in post hoc testing for CNN, LDA and PCA equal correspondingly: 2.625, 2.125 and 1.25.
 With $\alpha = 0.05$ null hypothesis was rejected for CNN and PCA.
-Very low p-value was reported for LDA and PCA, and this is in line with obtained difference in average ranks equal 0.875.
+Very low p-value was reported for LDA and PCA, and this is in line with obtained difference in average rank that equals 0.875.
 
 \newpage
 
 
 \section{Conclusions}
 
-Experiments were carried out with established methodology. Results were collected and analysed. Some flaws in chosen methodology were pointed out and taken into consideration during analysis of results.
+Experiments were carried out with established methodology. Results were collected and analysed. Some flaws in chosen methodology were pointed out and taken into consideration during the analysis of results.
 
-For both SVC and MLP performance obtained by CNN was better then performance of PCA. No statistical difference was noted between LDA and PCA, although PCA with SVC had some clear problems with some databases, especially with datasets with different face orientation (e.g. att, georgia, muct or stirling).
+For both SVC and MLP classifiers performance obtained by CNN was better then performance of PCA and LDA. No statistical difference was noted between LDA and PCA. Besides that, PCA in usage with SVC had some problems with few databases, especially with datasets containing different face orientations (f.e.. att, georgia, muct or stirling).
 
-Time of training was reported in this article, but only for illustrative purposes. No statistical analysis of training time was performed.
+Time of the training was reported in this article, but only for illustrative purposes. No statistical analysis of training time was performed.
 
 %During tests perfming some problems occured. For some dataset with large number of images Python virtual machine run out of memory on machine with 8 Gb RAM. This happend during computing eigenvalues and eigenvectors of $S_W$ matrix (when establishing within variance) while performing LDA for vidtimit dataset. $A_i$ (see equation \ref{eq:SW}) contains only images for $i$-th class. Maximal number of images for one class in vidtimit is 2644. Images are stored using 8 bit uint type. All images are converted to greyscale, so there is one 8 bit unsigned int per pixel. Sckit-learn use SVD implementation from numpy to establish eigenvalues and eigenvectors of $S_W$. In theory memory needed for storage of SVDs decomposition matrixes given all previous asumptions is aproximatly 0.25 Gb, which should not be problem. Numpy utilises Lapack library for SVD computation. Lapack is linear algebra library written in Fortran. There is little known about alorithms used to perform SVD in Lapack, therefore reason of raising MemoryError cannot be established. This problem was omitted by performing tests on machine with 16 Gb RAM. 
 
