@@ -235,6 +235,11 @@ Classifiers used for comparison of feature extraction methods were Neural Networ
 
 Analysis of results was performed using Friedman test with Nemenyi post-hoc test, as suggested in \cite{demsar}.
 
+\subsection{Hyperparameters of FE methods}
+
+For PCA and LDA decomposition with 100 components was performed. Most common aproach with PCA is to take components, that are responsible for 95\% of variance in the dataset. This approach can give better results in some cases, but is very expensive computationaly, espetialy for 10 fold cross validation. 
+
+
 \section{Results}
 
 Tests were performed separately for SVC and MLP classifiers for all FE methods. Obtained accuracy and training time were presented in below tables and plots.
@@ -366,16 +371,16 @@ P-value for difference between CNN and LDA was lower then for LDA and PCA, what 
 
 \newpage
 
-With obtained results null hypothesis of Friedmann test was rejected at significance level $\alpha = 0.05$ (see Table \ref{table:svm_pvalues}). 
-Results of post-hoc Nemenyi tests for FE methods similarity were shown in Table \ref{tab:svm_posthoc_pvalues}. 
+With obtained results null hypothesis of Friedmann test was rejected at significance level $\alpha = 0.05$ (see Table \ref{table:NN_pvalues}). 
+Results of post-hoc Nemenyi tests for FE methods similarity were shown in Table \ref{tab:NN_posthoc_pvalues}. 
 Average ranks obtained in post hoc testing for CNN, LDA and PCA were correspondingly: 2.625, 2.125 and 1.25.
 With $\alpha = 0.05$ null hypothesis was rejected for CNN and PCA.
-Very low p-value was reported for LDA and PCA, and this is in line with obtained difference in average ranks that equal to 0.875.
+Very low p-value was reported for LDA and PCA, and this is in line with obtained difference in average ranks equal 0.875.
 
 
 \section{Conclusions}
 
-Experiments were carried out with established methodology. Results were collected and analysed. Some flaws in chosen methodology were pointed out and considered during analysis of results.
+Experiments were carried out with established methodology. Results were collected and analysed. Some flaws in chosen methodology were pointed out and taken into consideration during analysis of results.
 
 For both SVC and MLP performance obtained by CNN was better then performance of PCA. No statistical difference was noted between LDA and PCA, although PCA with SVC had some clear problems with some databases, especially with datasets with different face orientation (eg. att, georgia, muct or stirling).
 
