@@ -239,6 +239,8 @@ Analysis of results was performed using Friedman test with Nemenyi post-hoc test
 
 For PCA and LDA decomposition with 100 components was performed. Most common aproach with PCA is to take components, that are responsible for 95\% of variance in the dataset. This approach can give better results in some cases, but is very expensive computationaly, espetialy for 10 fold cross validation. 
 
+CNN architecture was based on 2 convolution layers with 7x7 and 3x3 kernels respectively, 2 pooling layers with 2x2 kernels and dense layer. Convolution layers contained Rectified Linear Unit (ReLU) activation functions. Dense layer used ReLU and Softmax activation functions. Last layer had 100 outputs for 100 components respectively.
+
 
 \section{Results}
 
@@ -248,6 +250,7 @@ The Nemenyi test ranks performance of algorithms for each dataset, then it calcu
 
 Also important issue with Stirling faces database was found. With approximate 9 images per class 10 fold Stratified Cross Validation cannot be performed. $N$ fold Stratified Cross Validation requires at least $N$ images per class. To overcome this problem Stirling database was oversampled.
 
+\newpage
 
 \subsection{Results for SVC}
 
@@ -275,7 +278,7 @@ Also important issue with Stirling faces database was found. With approximate 9 
 
 \begin{table}[!h]
     \centering
-    \caption{Pvalues of Neymani post-hoc tests for SVC classifier.}
+    \caption{P-values of Neymani post-hoc tests for SVC classifier.}
     \begin{tabular}{|c|c|c|c|}
          \hline
           & CNN & LDA & PCA \\
@@ -315,7 +318,6 @@ P-value for difference between CNN and LDA was lower then for LDA and PCA, what 
 \newpage
 
 \subsection{Results for MLP}
-
 
 \begin{table}[!h]
     \centering
@@ -377,6 +379,7 @@ Average ranks obtained in post hoc testing for CNN, LDA and PCA were correspondi
 With $\alpha = 0.05$ null hypothesis was rejected for CNN and PCA.
 Very low p-value was reported for LDA and PCA, and this is in line with obtained difference in average ranks equal 0.875.
 
+\newpage
 
 \section{Conclusions}
 
