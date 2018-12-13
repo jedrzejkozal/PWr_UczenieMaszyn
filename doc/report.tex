@@ -237,7 +237,7 @@ All images in chosen datasets contain varying lightning conditions, emotion expr
 
 \subsection{Experiment description}
 
-PCA, LDA, CNN-based feature extraction methods and classifiers were trained using the same training set. Models were evaluated with 10-fold stratified cross validation, which guarantees that both training and test sets contain proportional number of images for each class. Accuracy was chosen as a main measure. The results for given classifier were given as an fold-wise average of all results obtained via cross validation.
+Goal of experiment was comparison of effectiveness of classification for selected FE methods over multiple datasets. Accuracy was chosen as a main measure of effectiveness. PCA, LDA, CNN-based feature extraction methods and classifiers were trained using the same training set. Models were evaluated with 10-fold stratified cross validation, which guarantees that both training and test sets contain proportional number of images for each class. The results for given classifier were given as an fold-wise average of all results obtained via cross validation. Folds were drawn separately for different classifiers. 
 
 Multilayer perceptron (MLP) and support vector classifier (SVC) were used for comparison of feature extraction methods. All classifiers hyperparameters were fixed during the whole experiment. Searching for the best hyperparameters for each dataset and extraction method could compromise gathered results of experiment.
 
@@ -256,7 +256,7 @@ CNN architecture was based on 2 convolution layers with 7x7 and 3x3 kernels resp
 
 \section{Results}
 
-Tests were performed separately for SVC and MLP classifiers for all FE methods. Obtained accuracy and training time were presented in below tables and plots.
+Tests were performed separately for SVC and MLP classifiers for all FE methods. Folds for SVC and MLP were drawn independently, meaning tests for both classifiers were performed on different folds. Obtained accuracy and training time were presented in below tables and plots.
 
 The Nemenyi test ranks performance of algorithms for each dataset, then calculates the mean of ranks for them. In the next step means are tested using Tukey test (to be more precise: differences of means are compared to the standard error) to check if there is a significant difference in performance over multiple datasets. In case of 3 data sets there are only 3 ranks that can be obtained. Each rank for chosen algorithm and dataset can take value of 1, 2 or 3, therefore difference between mean ranks will not be a large value (in fact maximal difference between mean ranks is 2). Significant difference will be noted by Nemenyi test between two algorithms which achieve ranks 1 or 3. This is a clear limitation of a post-hoc analysis in this case. Suppose we have two algorithms with a good performance (A and B) and one algorithm with a poor performance (C). Algorithm A is slightly better then algorithm B, therefore it obtains more frequently rank 3. In this case due to comparing only average ranks significant difference between algorithms A and C will be reported, and no significant difference will be reported for algorithms B and C. This was taken into consideration in the further analysis of results.
 
