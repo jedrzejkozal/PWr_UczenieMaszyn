@@ -13,6 +13,7 @@
 \usepackage{amssymb}
 \usepackage{url}
 \usepackage{makecell}
+\usepackage{color, colortbl}
 
 \lstdefinestyle{mystyle}{
 	backgroundcolor=\color{gray!5!white},   
@@ -38,6 +39,7 @@
 
 \newcommand{\bb}{\textbf}
 \DeclareMathOperator*{\argmax}{argmax}
+\definecolor{Gray}{gray}{0.9}
 
 \title{\LARGE \bf
 Methods of feature extraction for broad and deep datasets
@@ -68,16 +70,16 @@ Feature extraction (FE), principal component analysis (PCA), linear discriminant
 
 \section{Introduction}
 
-Feature extraction (FE) is the fundamental part of Machine Learning. Its main responsibility it to make sure that our classifiers won't get tons of unnecessary data on their inputs. We can divide FE algorithms into two groups: statistical and non-statistical. The group of statistical methods contains algorithms like principle component analysis (PCA) or linear discriminant analysis (LDA). In the second group we can find methods based on artificial intelligence, such as convolutional neural networks (CNN). 
+Feature extraction (FE) is the fundamental part of Machine Learning. Its main responsibility is to make sure that our classifiers won't get tons of unnecessary data on their inputs. We can divide FE algorithms into two groups: statistical and non-statistical. The group of statistical methods contains algorithms like principle component analysis (PCA) or linear discriminant analysis (LDA). In the second group we can find methods based on artificial intelligence, such as convolutional neural networks (CNN). 
 
 Extracting particular features may help classifiers in making proper decisions, but in many cases it is not helpful for humans. When decision system is a black box, experts cannot use their intuition to predict the output, they also have no explanation why such decision was made. For example, it cannot be deduced why hospital diagnostic system assigned particular set of symptoms to the disease, or why loan request was rejected by the bank system.
 
-Feature extraction methods can be straightly connected with the field of studies and analysed data. Therefore, many algorithms are composed to give the best performance for specific domain or particular type of data. With regard to this fact, in this article both basic FE methods and state-of-the-art solutions will be analysed and compared. The main focus will be put on the comparison of PCA, LDA, and CNN approaches by applying them to 12 datasets and testing their effectiveness on 2 selected classifiers.
+FE methods can be straightly connected with the various fields of studies and analysed data. Therefore, many algorithms are composed to give the best performance for specific domain or particular type of data. With regard to this fact, in this article both basic FE methods and state-of-the-art solutions will be analysed and compared. The main focus will be put on the comparison of PCA, LDA, and CNN approaches by applying them to 12 datasets and testing their effectiveness on 2 selected classifiers.
 
 \section{Related work}
-PCA was introduced in 1901 paper \cite{PCA}. Currently it is one of the most popular feature extraction algorithms. It applies to many fields, especially to computer vision \cite{PCA_book}. Methods such as Robust PCA, Simplified PCA or Functional PCA were described in \cite{PCA_recent}. More insight into RPCA was given in \cite{RPCA}.
+PCA was described for the first time in \cite{PCA}. Currently it is one of the most popular FE algorithms. It applies to many fields, especially to computer vision \cite{PCA_book}. Methods such as Robust PCA, Simplified PCA or Functional PCA were described in \cite{PCA_recent}. More insight into RPCA was given in \cite{RPCA}.
 
-LDA was introduced in \cite{LDA} as a solution for binary classification problem. Important adjustments were made in \cite{multi_LDA} that enabled usage of LDA for multi-class problem. Authors of \cite{LDA_recent} focused mainly on the problem of LDA for small sample size data, which is not relevant in case of this work, but it gives a good overview on the research done recently in this field.
+LDA was introduced in \cite{LDA} as a solution for binary classification problem. Important adjustments, that enabled usage of LDA for multi-class problem, were made in \cite{multi_LDA}.  Authors of \cite{LDA_recent} focused mainly on the problem of LDA for small sample size data, which is not relevant in case of this work, but it gives a good overview on the research done recently in this field.
 
 Balanced local discriminant embedding and convolutional neural networks as methods for spacial-domain and spectral-domain feature extraction were proposed in \cite{blde-cnn}. BLDE was used as a first part of the described hyperspectral images classifier. Its task was to find a low-dimensional representation of classified images. Second part included CNN framework designed especially for extracting high level deep features. Extracted features were then stacked and input into logistic regression classifier. Usage of convolutional neural networks for feature extraction purposes was also proposed in \cite{cnn}. In this case, 3-D CNN model with combined regularization was used in spectral-spacial feature extraction. Comparison of 3-D CNN model with another deep learning based methods, like stacked autoencoder, deep brief network or 2D-CNN-based method was described in \cite{cnn2}. Another CNN-based deep learning approach was shown in \cite{cnn3}. Proposed approach assumed usage of the special type of CNN architecture - Deep Pyramidal Residual Network. The specific part of this architecture were pyramidal bottleneck residual blocks of convolutional layers. It allows to gradually increase the feature map dimension at all convolutional layers, what leads to involving more locations as the network depth increases, balancing the workload among all units and preserving the time complexity on each layer. Another solution for improving spectral-spatial feature extraction was proposed in \cite{cnn4}. Traditional pooling layer of CNN was replaced with spatial pyramid pooling, what resulted in increasement of extraction effectiveness.
 
@@ -199,31 +201,32 @@ According to \cite{Goodfellow-et-al-2016}, convolution operation is used in the 
     \caption{Comparison of datasets.}
     \begin{tabular}{|c|c|c|c|}
          \hline
+          \rowcolor{Gray}
          dataset & \thead{number of\\ images} & \thead{approximate\\ number of\\ images per subject} & source \\
          \hline
-         Specs on Faces & 42592 & >100 & \cite{afifi2017afif4} \\
+         specs-on-faces & 42592 & >100 & \cite{afifi2017afif4} \\
          \hline
-         JAFFE & 213 & 20 & \cite{JAFFE} \\
+         jaffe & 213 & 20 & \cite{JAFFE} \\
          \hline
-         Caltech Faces 1999 & 450 & 16 & \cite{CaltechFaces} \\
+         caltec & 450 & 16 & \cite{CaltechFaces} \\
          \hline
-         Georgia Tech & 750 & 15 & \cite{georgia_tech_face_database} \\
+         georgia & 750 & 15 & \cite{georgia_tech_face_database} \\
          \hline
-         UMist-Faces & 576 & 30 & \cite{UMist-Faces} \\
+         umist & 576 & 30 & \cite{UMist-Faces} \\
          \hline
-         Stirling faces & 312 & 9 & \cite{Stirling_faces} \\
+         stirling & 312 & 9 & \cite{Stirling_faces} \\
          \hline
-         VidTIMIT & 94600 & >100 & \cite{VidTIMIT} \\
+         vidtimit & 94600 & >100 & \cite{VidTIMIT} \\
          \hline
          muct & 3755 & 15 & \cite{Milborrow10} \\
          \hline
          yale & 330 & 22 & \cite{yale} \\
          \hline
-         AT\&T Database & 400 & 10 & \cite{TheDatabaseOfFaces} \\
+         att & 400 & 10 & \cite{TheDatabaseOfFaces} \\
          \hline
-         MIT-CBCL  & 2000 & >100 & \cite{FaceRecognitionDatabase} \\
+         mit  & 2000 & >100 & \cite{FaceRecognitionDatabase} \\
          \hline
-         Essex Collection & 7900 & 20 & \cite{essex} \\
+         essex & 7900 & 20 & \cite{essex} \\
           \hline
     \end{tabular}
     \label{tab:datasets}
@@ -288,9 +291,10 @@ During experiment an important issue with Stirling faces database was found. Wit
 
 \begin{table}[!h]
     \centering
-    \caption{P-values of Neymani post-hoc tests for SVC classifier.}
+    \caption{P-values of Nemenyi post-hoc tests for SVC classifier.}
     \begin{tabular}{|c|c|c|c|}
          \hline
+          \rowcolor{Gray}
           & CNN & LDA & PCA \\
          \hline
          CNN &  1 &  0.128 &  0.003 \\
@@ -356,6 +360,7 @@ P-value for difference between CNN and LDA was lower then for LDA and PCA, what 
     \caption{P-values of Nemenyi post-hoc tests for MLP classifier.}
     \begin{tabular}{|c|c|c|c|}
          \hline
+          \rowcolor{Gray}
           & CNN & LDA & PCA \\
          \hline
          CNN &  1 &  0.438 &  0.002 \\
