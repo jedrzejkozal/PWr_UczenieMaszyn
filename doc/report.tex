@@ -102,7 +102,7 @@ where $f$ is a variation while projecting on $\bb{u}$ and it is an additional co
 	    &= \bb{u}^T S \bb{u} - \lambda (1 - \bb{u}^T \bb{u})   \notag
 \end{align}
 
-and solved as optimization with the constrain problem. Please note that covariance matrix is symmetrical, i.e. it can be written as $S = Q \Lambda Q^{T}$, where $Q$ is an orthogonal matrix, and $\Lambda$ is a diagonal matrix with the real eigenvalues of $S$. According to this fact, finding a new basis, which is always orthogonal, is always possible.
+and solved as optimization with the constrain problem. Please note that covariance matrix is symmetrical, i.e. it can be written as $S = Q \Lambda Q^{T}$, where $Q$ is an orthogonal matrix, and $\Lambda$ is a diagonal matrix with the real eigenvalues of $S$. Due to this fact finding a new basis, which is always orthogonal, is always possible.
 
 Taking $\bb{u}_{n}$ as $n$-th eigenvector of covariance matrix, projection matrix $P$ can be written as:
 
@@ -260,7 +260,7 @@ CNN architecture was based on 2 convolution layers with 7x7 and 3x3 kernels resp
 
 \section{Results}
 
-Tests were performed separately for SVC and MLP classifiers for all FE methods. Folds for SVC and MLP were drawn independently and meaning tests for both classifiers were performed on different folds. Obtained accuracy and training time were presented in below tables and plots.
+Tests were performed separately for SVC and MLP classifiers for all FE methods. Folds for SVC and MLP were drawn independently and significance tests for both classifiers were performed on different folds. Obtained accuracy and training time were presented in below tables and plots.
 
 The Nemenyi test ranks performance of algorithms for each dataset, then calculates the mean of ranks for them. In the next step means are tested using Tukey test (to be more precise: differences of means are compared to the standard error) to check if there is a significant difference in performance over multiple datasets. In case of 3 data sets there are only 3 ranks that can be obtained. Each rank for chosen algorithm and dataset can take value of 1, 2 or 3, therefore difference between mean ranks will not be a large value (in fact maximum difference between mean ranks is 2). Significant difference will be noted by Nemenyi test between two algorithms which achieve ranks 1 or 3. This is a clear limitation of a post-hoc analysis in this case. Suppose we have two algorithms with a good performance (A and B) and one algorithm with a poor performance (C). Algorithm A is slightly better then algorithm B, therefore it obtains rank 3 more frequently. In this case due to comparing only average ranks significant difference between algorithms A and C will be reported, and no significant difference will be reported for algorithms B and C. This was taken into consideration in the further analysis of results.
 
